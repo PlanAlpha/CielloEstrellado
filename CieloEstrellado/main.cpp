@@ -4,18 +4,39 @@
 int main(int __attribute__((unused)) argc, const char __attribute__((unused)) * argv[])
 {
     using namespace PlanAlpha;
-    while (1) {
-        for (int i = -1000; i < 1000; i++) {
-            rightMotor.forward(i / 1000.0);
-            leftMotor.forward(i / 1000.0);
-            wait_ms(1);
-        }
-        for (int i = 1000; i > -1000; i--) {
-            rightMotor.forward(i / 1000.0);
-            leftMotor.forward(i / 1000.0);
-            wait_ms(1);
-        }
-    }
+	
+	float motorSpeed = 0.2;
+//	while (1) {
+//		printf("%f", forwardLeftLineSensor.readRawValue());
+//		printf("\t");
+//		printf("%f", forwardCenterLineSensor.readRawValue());
+//		printf("\t");
+//		printf("%f", forwardRightLineSensor.readRawValue());
+//		printf("\n");
+//	}
+	while (1) {
+		if (forwardLineSensors.read() & PAThreeLineSensors::Left) {
+			if (forwardLineSensors.read() & PAThreeLineSensors::Right) {
+				//akaaaaaaaaaaaaaaaaaaaaaaan
+//				speaker1.play(440, 0.5, 100);
+			}else{
+//				speaker1.play(600, 0.5, 100);
+				leftMotor.forward(-motorSpeed);
+				rightMotor.forward(motorSpeed);
+			}
+		}else{
+			if(forwardLineSensors.read() & PAThreeLineSensors::Right) {
+				leftMotor.forward(motorSpeed);
+				rightMotor.forward(-motorSpeed);
+			}else{
+				leftMotor.forward(motorSpeed);
+				rightMotor.forward(motorSpeed);
+			}
+		}
+	}
+	
+	
+	
 
     return 0;
 }

@@ -3,22 +3,24 @@
 #include <stdlib.h>
 #include "wait_api.h"
 
+#define LINE_THRESHOLD 0.4
+
 PASpeaker          PlanAlpha::speaker1(p23);
 PASpeaker          PlanAlpha::speaker2(p24);
 GCADJD             PlanAlpha::leftColorSensor(I2CDevice::Pin::I2C0);
 GCADJD             PlanAlpha::rightColorSensor(I2CDevice::Pin::I2C1);
 //GC6050             PlanAlpha::gyroAcceleroSensor(I2CDevice::Pin::I2C0);
 //PAL3G4200D         PlanAlpha::gyroSensor(I2CDevice::Pin::I2C0);
-PALineSensor       PlanAlpha::forwardLeftLineSensor(p17, 0.5);
-PALineSensor       PlanAlpha::forwardCenterLineSensor(p20, 0.5);
-PALineSensor       PlanAlpha::forwardRightLineSensor(p19, 0.5);
-PALineSensor       PlanAlpha::middleLeftLineSensor(p16, 0.5);
-PALineSensor       PlanAlpha::middleRightLineSensor(p15, 0.5);
+PALineSensor       PlanAlpha::forwardLeftLineSensor(p17, LINE_THRESHOLD);
+PALineSensor       PlanAlpha::forwardCenterLineSensor(p20, LINE_THRESHOLD);
+PALineSensor       PlanAlpha::forwardRightLineSensor(p19, LINE_THRESHOLD);
+PALineSensor       PlanAlpha::middleLeftLineSensor(p16, LINE_THRESHOLD);
+PALineSensor       PlanAlpha::middleRightLineSensor(p15, LINE_THRESHOLD);
 PAThreeLineSensors PlanAlpha::forwardLineSensors(
                         &forwardLeftLineSensor, &forwardCenterLineSensor, &forwardRightLineSensor
                    );
-GCMotor            PlanAlpha::leftMotor(p30, p26);
-GCMotor            PlanAlpha::rightMotor(p29, p25);
+GCMotor            PlanAlpha::rightMotor(p30, p26);
+GCMotor            PlanAlpha::leftMotor(p29, p25);
 mbed::DigitalIn    PlanAlpha::powerSwitch(p18, PullNone);
 
 #define NOTE_B0  31
