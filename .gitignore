@@ -1,0 +1,8 @@
+#.gitignore
+
+.DS_Store
+Makefile
+CieloEstrellado/Builds/*
+
+!CieloEstrellado.xcodeproj/project.pbxproj 
+CieloEstrellado.xcodeproj/*
