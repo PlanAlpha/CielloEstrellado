@@ -173,7 +173,6 @@
 		CE392F4B1BDF1CAC00EA8942 /* PASpeaker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PASpeaker.cpp; sourceTree = "<group>"; };
 		CE392F4D1BDF1F6200EA8942 /* PlanAlpha.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlanAlpha.cpp; sourceTree = "<group>"; };
 		CE392F4E1BDF1F6200EA8942 /* PlanAlpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlanAlpha.h; sourceTree = "<group>"; };
-		CED6DA861BE4A48A0054B887 /* .hgignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .hgignore; sourceTree = "<group>"; };
 		CED6DA881BE4A48A0054B887 /* Mail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mail.h; sourceTree = "<group>"; };
 		CED6DA891BE4A48A0054B887 /* MemoryPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoryPool.h; sourceTree = "<group>"; };
 		CED6DA8A1BE4A48A0054B887 /* Mutex.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mutex.cpp; sourceTree = "<group>"; };
@@ -441,7 +440,6 @@
 		CED6DA851BE4A48A0054B887 /* mbed-rtos */ = {
 			isa = PBXGroup;
 			children = (
-				CED6DA861BE4A48A0054B887 /* .hgignore */,
 				CED6DA871BE4A48A0054B887 /* rtos */,
 				CED6DA941BE4A48A0054B887 /* rtx */,
 			);
