@@ -1,7 +1,7 @@
 #include "PlanAlpha.h"
 #include "wait_api.h"
 
-int main(int __attribute__((unused)) argc, const char __attribute__((unused)) * argv[])
+int PlanAlpha::PAApplicationMain()
 {
     using namespace PlanAlpha;
 	

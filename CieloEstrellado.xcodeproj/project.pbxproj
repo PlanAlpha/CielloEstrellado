@@ -20,6 +20,25 @@
 		CE392F491BDF133500EA8942 /* PAThreeLineSensors.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE392F401BDF133500EA8942 /* PAThreeLineSensors.cpp */; settings = {ASSET_TAGS = (); }; };
 		CE392F4C1BDF1CAC00EA8942 /* PASpeaker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE392F4B1BDF1CAC00EA8942 /* PASpeaker.cpp */; settings = {ASSET_TAGS = (); }; };
 		CE392F4F1BDF1F6200EA8942 /* PlanAlpha.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE392F4D1BDF1F6200EA8942 /* PlanAlpha.cpp */; settings = {ASSET_TAGS = (); }; };
+		CED6DAB71BE4A48A0054B887 /* Mutex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CED6DA8A1BE4A48A0054B887 /* Mutex.cpp */; settings = {ASSET_TAGS = (); }; };
+		CED6DAB81BE4A48A0054B887 /* RtosTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CED6DA8E1BE4A48A0054B887 /* RtosTimer.cpp */; settings = {ASSET_TAGS = (); }; };
+		CED6DAB91BE4A48A0054B887 /* Semaphore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CED6DA901BE4A48A0054B887 /* Semaphore.cpp */; settings = {ASSET_TAGS = (); }; };
+		CED6DABA1BE4A48A0054B887 /* Thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CED6DA921BE4A48A0054B887 /* Thread.cpp */; settings = {ASSET_TAGS = (); }; };
+		CED6DABB1BE4A48A0054B887 /* HAL_CM.c in Sources */ = {isa = PBXBuildFile; fileRef = CED6DA971BE4A48A0054B887 /* HAL_CM.c */; settings = {ASSET_TAGS = (); }; };
+		CED6DABC1BE4A48A0054B887 /* rt_CMSIS.c in Sources */ = {isa = PBXBuildFile; fileRef = CED6DA991BE4A48A0054B887 /* rt_CMSIS.c */; settings = {ASSET_TAGS = (); }; };
+		CED6DABD1BE4A48A0054B887 /* rt_Event.c in Sources */ = {isa = PBXBuildFile; fileRef = CED6DA9A1BE4A48A0054B887 /* rt_Event.c */; settings = {ASSET_TAGS = (); }; };
+		CED6DABE1BE4A48A0054B887 /* rt_List.c in Sources */ = {isa = PBXBuildFile; fileRef = CED6DA9D1BE4A48A0054B887 /* rt_List.c */; settings = {ASSET_TAGS = (); }; };
+		CED6DABF1BE4A48A0054B887 /* rt_Mailbox.c in Sources */ = {isa = PBXBuildFile; fileRef = CED6DA9F1BE4A48A0054B887 /* rt_Mailbox.c */; settings = {ASSET_TAGS = (); }; };
+		CED6DAC01BE4A48A0054B887 /* rt_MemBox.c in Sources */ = {isa = PBXBuildFile; fileRef = CED6DAA11BE4A48A0054B887 /* rt_MemBox.c */; settings = {ASSET_TAGS = (); }; };
+		CED6DAC11BE4A48A0054B887 /* rt_Mutex.c in Sources */ = {isa = PBXBuildFile; fileRef = CED6DAA31BE4A48A0054B887 /* rt_Mutex.c */; settings = {ASSET_TAGS = (); }; };
+		CED6DAC21BE4A48A0054B887 /* rt_Robin.c in Sources */ = {isa = PBXBuildFile; fileRef = CED6DAA51BE4A48A0054B887 /* rt_Robin.c */; settings = {ASSET_TAGS = (); }; };
+		CED6DAC31BE4A48A0054B887 /* rt_Semaphore.c in Sources */ = {isa = PBXBuildFile; fileRef = CED6DAA71BE4A48A0054B887 /* rt_Semaphore.c */; settings = {ASSET_TAGS = (); }; };
+		CED6DAC41BE4A48A0054B887 /* rt_System.c in Sources */ = {isa = PBXBuildFile; fileRef = CED6DAA91BE4A48A0054B887 /* rt_System.c */; settings = {ASSET_TAGS = (); }; };
+		CED6DAC51BE4A48A0054B887 /* rt_Task.c in Sources */ = {isa = PBXBuildFile; fileRef = CED6DAAB1BE4A48A0054B887 /* rt_Task.c */; settings = {ASSET_TAGS = (); }; };
+		CED6DAC61BE4A48A0054B887 /* rt_Time.c in Sources */ = {isa = PBXBuildFile; fileRef = CED6DAAD1BE4A48A0054B887 /* rt_Time.c */; settings = {ASSET_TAGS = (); }; };
+		CED6DAC71BE4A48A0054B887 /* RTX_Conf_CM.c in Sources */ = {isa = PBXBuildFile; fileRef = CED6DAB21BE4A48A0054B887 /* RTX_Conf_CM.c */; settings = {ASSET_TAGS = (); }; };
+		CED6DAC81BE4A48A0054B887 /* HAL_CM3.S in Sources */ = {isa = PBXBuildFile; fileRef = CED6DAB51BE4A48A0054B887 /* HAL_CM3.S */; settings = {ASSET_TAGS = (); }; };
+		CED6DAC91BE4A48A0054B887 /* SVC_Table.S in Sources */ = {isa = PBXBuildFile; fileRef = CED6DAB61BE4A48A0054B887 /* SVC_Table.S */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -154,6 +173,50 @@
 		CE392F4B1BDF1CAC00EA8942 /* PASpeaker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PASpeaker.cpp; sourceTree = "<group>"; };
 		CE392F4D1BDF1F6200EA8942 /* PlanAlpha.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlanAlpha.cpp; sourceTree = "<group>"; };
 		CE392F4E1BDF1F6200EA8942 /* PlanAlpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlanAlpha.h; sourceTree = "<group>"; };
+		CED6DA861BE4A48A0054B887 /* .hgignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .hgignore; sourceTree = "<group>"; };
+		CED6DA881BE4A48A0054B887 /* Mail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mail.h; sourceTree = "<group>"; };
+		CED6DA891BE4A48A0054B887 /* MemoryPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoryPool.h; sourceTree = "<group>"; };
+		CED6DA8A1BE4A48A0054B887 /* Mutex.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mutex.cpp; sourceTree = "<group>"; };
+		CED6DA8B1BE4A48A0054B887 /* Mutex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mutex.h; sourceTree = "<group>"; };
+		CED6DA8C1BE4A48A0054B887 /* Queue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Queue.h; sourceTree = "<group>"; };
+		CED6DA8D1BE4A48A0054B887 /* rtos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtos.h; sourceTree = "<group>"; };
+		CED6DA8E1BE4A48A0054B887 /* RtosTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RtosTimer.cpp; sourceTree = "<group>"; };
+		CED6DA8F1BE4A48A0054B887 /* RtosTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RtosTimer.h; sourceTree = "<group>"; };
+		CED6DA901BE4A48A0054B887 /* Semaphore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Semaphore.cpp; sourceTree = "<group>"; };
+		CED6DA911BE4A48A0054B887 /* Semaphore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Semaphore.h; sourceTree = "<group>"; };
+		CED6DA921BE4A48A0054B887 /* Thread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Thread.cpp; sourceTree = "<group>"; };
+		CED6DA931BE4A48A0054B887 /* Thread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Thread.h; sourceTree = "<group>"; };
+		CED6DA961BE4A48A0054B887 /* cmsis_os.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cmsis_os.h; sourceTree = "<group>"; };
+		CED6DA971BE4A48A0054B887 /* HAL_CM.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = HAL_CM.c; sourceTree = "<group>"; };
+		CED6DA981BE4A48A0054B887 /* os_tcb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = os_tcb.h; sourceTree = "<group>"; };
+		CED6DA991BE4A48A0054B887 /* rt_CMSIS.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rt_CMSIS.c; sourceTree = "<group>"; };
+		CED6DA9A1BE4A48A0054B887 /* rt_Event.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rt_Event.c; sourceTree = "<group>"; };
+		CED6DA9B1BE4A48A0054B887 /* rt_Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rt_Event.h; sourceTree = "<group>"; };
+		CED6DA9C1BE4A48A0054B887 /* rt_HAL_CM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rt_HAL_CM.h; sourceTree = "<group>"; };
+		CED6DA9D1BE4A48A0054B887 /* rt_List.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rt_List.c; sourceTree = "<group>"; };
+		CED6DA9E1BE4A48A0054B887 /* rt_List.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rt_List.h; sourceTree = "<group>"; };
+		CED6DA9F1BE4A48A0054B887 /* rt_Mailbox.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rt_Mailbox.c; sourceTree = "<group>"; };
+		CED6DAA01BE4A48A0054B887 /* rt_Mailbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rt_Mailbox.h; sourceTree = "<group>"; };
+		CED6DAA11BE4A48A0054B887 /* rt_MemBox.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rt_MemBox.c; sourceTree = "<group>"; };
+		CED6DAA21BE4A48A0054B887 /* rt_MemBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rt_MemBox.h; sourceTree = "<group>"; };
+		CED6DAA31BE4A48A0054B887 /* rt_Mutex.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rt_Mutex.c; sourceTree = "<group>"; };
+		CED6DAA41BE4A48A0054B887 /* rt_Mutex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rt_Mutex.h; sourceTree = "<group>"; };
+		CED6DAA51BE4A48A0054B887 /* rt_Robin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rt_Robin.c; sourceTree = "<group>"; };
+		CED6DAA61BE4A48A0054B887 /* rt_Robin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rt_Robin.h; sourceTree = "<group>"; };
+		CED6DAA71BE4A48A0054B887 /* rt_Semaphore.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rt_Semaphore.c; sourceTree = "<group>"; };
+		CED6DAA81BE4A48A0054B887 /* rt_Semaphore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rt_Semaphore.h; sourceTree = "<group>"; };
+		CED6DAA91BE4A48A0054B887 /* rt_System.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rt_System.c; sourceTree = "<group>"; };
+		CED6DAAA1BE4A48A0054B887 /* rt_System.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rt_System.h; sourceTree = "<group>"; };
+		CED6DAAB1BE4A48A0054B887 /* rt_Task.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rt_Task.c; sourceTree = "<group>"; };
+		CED6DAAC1BE4A48A0054B887 /* rt_Task.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rt_Task.h; sourceTree = "<group>"; };
+		CED6DAAD1BE4A48A0054B887 /* rt_Time.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rt_Time.c; sourceTree = "<group>"; };
+		CED6DAAE1BE4A48A0054B887 /* rt_Time.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rt_Time.h; sourceTree = "<group>"; };
+		CED6DAAF1BE4A48A0054B887 /* rt_TypeDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rt_TypeDef.h; sourceTree = "<group>"; };
+		CED6DAB01BE4A48A0054B887 /* RTX_CM_lib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTX_CM_lib.h; sourceTree = "<group>"; };
+		CED6DAB11BE4A48A0054B887 /* RTX_Conf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTX_Conf.h; sourceTree = "<group>"; };
+		CED6DAB21BE4A48A0054B887 /* RTX_Conf_CM.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = RTX_Conf_CM.c; sourceTree = "<group>"; };
+		CED6DAB51BE4A48A0054B887 /* HAL_CM3.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = HAL_CM3.S; sourceTree = "<group>"; };
+		CED6DAB61BE4A48A0054B887 /* SVC_Table.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = SVC_Table.S; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -183,6 +246,7 @@
 				CE392F111BDF09AC00EA8942 /* main.cpp */,
 				CE392F131BDF09AC00EA8942 /* Makefile */,
 				CE392F151BDF09AC00EA8942 /* LPC1768.xcconfig */,
+				CED6DA851BE4A48A0054B887 /* mbed-rtos */,
 				CE392EA31BDF09AC00EA8942 /* mbed */,
 			);
 			path = CieloEstrellado;
@@ -374,6 +438,97 @@
 			path = Robot_APIs;
 			sourceTree = "<group>";
 		};
+		CED6DA851BE4A48A0054B887 /* mbed-rtos */ = {
+			isa = PBXGroup;
+			children = (
+				CED6DA861BE4A48A0054B887 /* .hgignore */,
+				CED6DA871BE4A48A0054B887 /* rtos */,
+				CED6DA941BE4A48A0054B887 /* rtx */,
+			);
+			path = "mbed-rtos";
+			sourceTree = "<group>";
+		};
+		CED6DA871BE4A48A0054B887 /* rtos */ = {
+			isa = PBXGroup;
+			children = (
+				CED6DA881BE4A48A0054B887 /* Mail.h */,
+				CED6DA891BE4A48A0054B887 /* MemoryPool.h */,
+				CED6DA8A1BE4A48A0054B887 /* Mutex.cpp */,
+				CED6DA8B1BE4A48A0054B887 /* Mutex.h */,
+				CED6DA8C1BE4A48A0054B887 /* Queue.h */,
+				CED6DA8D1BE4A48A0054B887 /* rtos.h */,
+				CED6DA8E1BE4A48A0054B887 /* RtosTimer.cpp */,
+				CED6DA8F1BE4A48A0054B887 /* RtosTimer.h */,
+				CED6DA901BE4A48A0054B887 /* Semaphore.cpp */,
+				CED6DA911BE4A48A0054B887 /* Semaphore.h */,
+				CED6DA921BE4A48A0054B887 /* Thread.cpp */,
+				CED6DA931BE4A48A0054B887 /* Thread.h */,
+			);
+			path = rtos;
+			sourceTree = "<group>";
+		};
+		CED6DA941BE4A48A0054B887 /* rtx */ = {
+			isa = PBXGroup;
+			children = (
+				CED6DA951BE4A48A0054B887 /* TARGET_CORTEX_M */,
+			);
+			path = rtx;
+			sourceTree = "<group>";
+		};
+		CED6DA951BE4A48A0054B887 /* TARGET_CORTEX_M */ = {
+			isa = PBXGroup;
+			children = (
+				CED6DA961BE4A48A0054B887 /* cmsis_os.h */,
+				CED6DA971BE4A48A0054B887 /* HAL_CM.c */,
+				CED6DA981BE4A48A0054B887 /* os_tcb.h */,
+				CED6DA991BE4A48A0054B887 /* rt_CMSIS.c */,
+				CED6DA9A1BE4A48A0054B887 /* rt_Event.c */,
+				CED6DA9B1BE4A48A0054B887 /* rt_Event.h */,
+				CED6DA9C1BE4A48A0054B887 /* rt_HAL_CM.h */,
+				CED6DA9D1BE4A48A0054B887 /* rt_List.c */,
+				CED6DA9E1BE4A48A0054B887 /* rt_List.h */,
+				CED6DA9F1BE4A48A0054B887 /* rt_Mailbox.c */,
+				CED6DAA01BE4A48A0054B887 /* rt_Mailbox.h */,
+				CED6DAA11BE4A48A0054B887 /* rt_MemBox.c */,
+				CED6DAA21BE4A48A0054B887 /* rt_MemBox.h */,
+				CED6DAA31BE4A48A0054B887 /* rt_Mutex.c */,
+				CED6DAA41BE4A48A0054B887 /* rt_Mutex.h */,
+				CED6DAA51BE4A48A0054B887 /* rt_Robin.c */,
+				CED6DAA61BE4A48A0054B887 /* rt_Robin.h */,
+				CED6DAA71BE4A48A0054B887 /* rt_Semaphore.c */,
+				CED6DAA81BE4A48A0054B887 /* rt_Semaphore.h */,
+				CED6DAA91BE4A48A0054B887 /* rt_System.c */,
+				CED6DAAA1BE4A48A0054B887 /* rt_System.h */,
+				CED6DAAB1BE4A48A0054B887 /* rt_Task.c */,
+				CED6DAAC1BE4A48A0054B887 /* rt_Task.h */,
+				CED6DAAD1BE4A48A0054B887 /* rt_Time.c */,
+				CED6DAAE1BE4A48A0054B887 /* rt_Time.h */,
+				CED6DAAF1BE4A48A0054B887 /* rt_TypeDef.h */,
+				CED6DAB01BE4A48A0054B887 /* RTX_CM_lib.h */,
+				CED6DAB11BE4A48A0054B887 /* RTX_Conf.h */,
+				CED6DAB21BE4A48A0054B887 /* RTX_Conf_CM.c */,
+				CED6DAB31BE4A48A0054B887 /* TARGET_M3 */,
+			);
+			path = TARGET_CORTEX_M;
+			sourceTree = "<group>";
+		};
+		CED6DAB31BE4A48A0054B887 /* TARGET_M3 */ = {
+			isa = PBXGroup;
+			children = (
+				CED6DAB41BE4A48A0054B887 /* TOOLCHAIN_GCC */,
+			);
+			path = TARGET_M3;
+			sourceTree = "<group>";
+		};
+		CED6DAB41BE4A48A0054B887 /* TOOLCHAIN_GCC */ = {
+			isa = PBXGroup;
+			children = (
+				CED6DAB51BE4A48A0054B887 /* HAL_CM3.S */,
+				CED6DAB61BE4A48A0054B887 /* SVC_Table.S */,
+			);
+			path = TOOLCHAIN_GCC;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXLegacyTarget section */
@@ -517,19 +672,38 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CED6DAC01BE4A48A0054B887 /* rt_MemBox.c in Sources */,
+				CED6DABF1BE4A48A0054B887 /* rt_Mailbox.c in Sources */,
+				CED6DAC41BE4A48A0054B887 /* rt_System.c in Sources */,
 				CE392F461BDF133500EA8942 /* PAL3G4200D.cpp in Sources */,
+				CED6DAC11BE4A48A0054B887 /* rt_Mutex.c in Sources */,
 				CE392F431BDF133500EA8942 /* GCADJD.cpp in Sources */,
+				CED6DAC71BE4A48A0054B887 /* RTX_Conf_CM.c in Sources */,
+				CED6DABC1BE4A48A0054B887 /* rt_CMSIS.c in Sources */,
+				CED6DABE1BE4A48A0054B887 /* rt_List.c in Sources */,
+				CED6DAB91BE4A48A0054B887 /* Semaphore.cpp in Sources */,
 				CE392F481BDF133500EA8942 /* PAPIDController.cpp in Sources */,
+				CED6DAC81BE4A48A0054B887 /* HAL_CM3.S in Sources */,
 				CE392F421BDF133500EA8942 /* GC6050.cpp in Sources */,
 				CE392F4F1BDF1F6200EA8942 /* PlanAlpha.cpp in Sources */,
 				CE392F451BDF133500EA8942 /* GCSonicSensor.cpp in Sources */,
+				CED6DAC61BE4A48A0054B887 /* rt_Time.c in Sources */,
+				CED6DABA1BE4A48A0054B887 /* Thread.cpp in Sources */,
 				CE392F141BDF09AC00EA8942 /* Makefile in Sources */,
+				CED6DABD1BE4A48A0054B887 /* rt_Event.c in Sources */,
+				CED6DAC21BE4A48A0054B887 /* rt_Robin.c in Sources */,
 				CE392F491BDF133500EA8942 /* PAThreeLineSensors.cpp in Sources */,
 				CE392F2E1BDF0A8100EA8942 /* I2CDevice.cpp in Sources */,
+				CED6DABB1BE4A48A0054B887 /* HAL_CM.c in Sources */,
+				CED6DAB71BE4A48A0054B887 /* Mutex.cpp in Sources */,
 				CE392F471BDF133500EA8942 /* PALineSensor.cpp in Sources */,
 				CE392F121BDF09AC00EA8942 /* main.cpp in Sources */,
+				CED6DAC31BE4A48A0054B887 /* rt_Semaphore.c in Sources */,
+				CED6DAB81BE4A48A0054B887 /* RtosTimer.cpp in Sources */,
 				CE392F4C1BDF1CAC00EA8942 /* PASpeaker.cpp in Sources */,
+				CED6DAC51BE4A48A0054B887 /* rt_Task.c in Sources */,
 				CE392F441BDF133500EA8942 /* GCMotor.cpp in Sources */,
+				CED6DAC91BE4A48A0054B887 /* SVC_Table.S in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
