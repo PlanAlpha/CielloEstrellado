@@ -1,7 +1,7 @@
 #include "GCMotor.h"
 #include <limits>
 
-GCMotor::GCMotor(PinName _digital, PinName _pwm) : digital(_digital, 0), pwm(_pwm)
+GCMotor::GCMotor(PinName _digital, PinName _pwm, bool _reverse) : digital(_digital, 0), pwm(_pwm), reverse(_reverse)
 {
     free();
 }
@@ -9,10 +9,10 @@ GCMotor::GCMotor(PinName _digital, PinName _pwm) : digital(_digital, 0), pwm(_pw
 void GCMotor::forward(float power)
 {
     if (power >= 0) {
-        digital = 1;
+        digital = reverse;
         pwm = power;
     } else {
-        digital = 0;
+        digital = !reverse;
         pwm = -power;
     }
 }

@@ -9,36 +9,36 @@
 /* Begin PBXBuildFile section */
 		CE392F121BDF09AC00EA8942 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE392F111BDF09AC00EA8942 /* main.cpp */; };
 		CE392F141BDF09AC00EA8942 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = CE392F131BDF09AC00EA8942 /* Makefile */; };
-		CE392F2E1BDF0A8100EA8942 /* I2CDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE392F2C1BDF0A1D00EA8942 /* I2CDevice.cpp */; settings = {ASSET_TAGS = (); }; };
-		CE392F421BDF133500EA8942 /* GC6050.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE392F301BDF133500EA8942 /* GC6050.cpp */; settings = {ASSET_TAGS = (); }; };
-		CE392F431BDF133500EA8942 /* GCADJD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE392F321BDF133500EA8942 /* GCADJD.cpp */; settings = {ASSET_TAGS = (); }; };
-		CE392F441BDF133500EA8942 /* GCMotor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE392F341BDF133500EA8942 /* GCMotor.cpp */; settings = {ASSET_TAGS = (); }; };
-		CE392F451BDF133500EA8942 /* GCSonicSensor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE392F361BDF133500EA8942 /* GCSonicSensor.cpp */; settings = {ASSET_TAGS = (); }; };
-		CE392F461BDF133500EA8942 /* PAL3G4200D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE392F381BDF133500EA8942 /* PAL3G4200D.cpp */; settings = {ASSET_TAGS = (); }; };
-		CE392F471BDF133500EA8942 /* PALineSensor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE392F3A1BDF133500EA8942 /* PALineSensor.cpp */; settings = {ASSET_TAGS = (); }; };
-		CE392F481BDF133500EA8942 /* PAPIDController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE392F3D1BDF133500EA8942 /* PAPIDController.cpp */; settings = {ASSET_TAGS = (); }; };
-		CE392F491BDF133500EA8942 /* PAThreeLineSensors.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE392F401BDF133500EA8942 /* PAThreeLineSensors.cpp */; settings = {ASSET_TAGS = (); }; };
-		CE392F4C1BDF1CAC00EA8942 /* PASpeaker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE392F4B1BDF1CAC00EA8942 /* PASpeaker.cpp */; settings = {ASSET_TAGS = (); }; };
-		CE392F4F1BDF1F6200EA8942 /* PlanAlpha.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE392F4D1BDF1F6200EA8942 /* PlanAlpha.cpp */; settings = {ASSET_TAGS = (); }; };
-		CED6DAB71BE4A48A0054B887 /* Mutex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CED6DA8A1BE4A48A0054B887 /* Mutex.cpp */; settings = {ASSET_TAGS = (); }; };
-		CED6DAB81BE4A48A0054B887 /* RtosTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CED6DA8E1BE4A48A0054B887 /* RtosTimer.cpp */; settings = {ASSET_TAGS = (); }; };
-		CED6DAB91BE4A48A0054B887 /* Semaphore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CED6DA901BE4A48A0054B887 /* Semaphore.cpp */; settings = {ASSET_TAGS = (); }; };
-		CED6DABA1BE4A48A0054B887 /* Thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CED6DA921BE4A48A0054B887 /* Thread.cpp */; settings = {ASSET_TAGS = (); }; };
-		CED6DABB1BE4A48A0054B887 /* HAL_CM.c in Sources */ = {isa = PBXBuildFile; fileRef = CED6DA971BE4A48A0054B887 /* HAL_CM.c */; settings = {ASSET_TAGS = (); }; };
-		CED6DABC1BE4A48A0054B887 /* rt_CMSIS.c in Sources */ = {isa = PBXBuildFile; fileRef = CED6DA991BE4A48A0054B887 /* rt_CMSIS.c */; settings = {ASSET_TAGS = (); }; };
-		CED6DABD1BE4A48A0054B887 /* rt_Event.c in Sources */ = {isa = PBXBuildFile; fileRef = CED6DA9A1BE4A48A0054B887 /* rt_Event.c */; settings = {ASSET_TAGS = (); }; };
-		CED6DABE1BE4A48A0054B887 /* rt_List.c in Sources */ = {isa = PBXBuildFile; fileRef = CED6DA9D1BE4A48A0054B887 /* rt_List.c */; settings = {ASSET_TAGS = (); }; };
-		CED6DABF1BE4A48A0054B887 /* rt_Mailbox.c in Sources */ = {isa = PBXBuildFile; fileRef = CED6DA9F1BE4A48A0054B887 /* rt_Mailbox.c */; settings = {ASSET_TAGS = (); }; };
-		CED6DAC01BE4A48A0054B887 /* rt_MemBox.c in Sources */ = {isa = PBXBuildFile; fileRef = CED6DAA11BE4A48A0054B887 /* rt_MemBox.c */; settings = {ASSET_TAGS = (); }; };
-		CED6DAC11BE4A48A0054B887 /* rt_Mutex.c in Sources */ = {isa = PBXBuildFile; fileRef = CED6DAA31BE4A48A0054B887 /* rt_Mutex.c */; settings = {ASSET_TAGS = (); }; };
-		CED6DAC21BE4A48A0054B887 /* rt_Robin.c in Sources */ = {isa = PBXBuildFile; fileRef = CED6DAA51BE4A48A0054B887 /* rt_Robin.c */; settings = {ASSET_TAGS = (); }; };
-		CED6DAC31BE4A48A0054B887 /* rt_Semaphore.c in Sources */ = {isa = PBXBuildFile; fileRef = CED6DAA71BE4A48A0054B887 /* rt_Semaphore.c */; settings = {ASSET_TAGS = (); }; };
-		CED6DAC41BE4A48A0054B887 /* rt_System.c in Sources */ = {isa = PBXBuildFile; fileRef = CED6DAA91BE4A48A0054B887 /* rt_System.c */; settings = {ASSET_TAGS = (); }; };
-		CED6DAC51BE4A48A0054B887 /* rt_Task.c in Sources */ = {isa = PBXBuildFile; fileRef = CED6DAAB1BE4A48A0054B887 /* rt_Task.c */; settings = {ASSET_TAGS = (); }; };
-		CED6DAC61BE4A48A0054B887 /* rt_Time.c in Sources */ = {isa = PBXBuildFile; fileRef = CED6DAAD1BE4A48A0054B887 /* rt_Time.c */; settings = {ASSET_TAGS = (); }; };
-		CED6DAC71BE4A48A0054B887 /* RTX_Conf_CM.c in Sources */ = {isa = PBXBuildFile; fileRef = CED6DAB21BE4A48A0054B887 /* RTX_Conf_CM.c */; settings = {ASSET_TAGS = (); }; };
-		CED6DAC81BE4A48A0054B887 /* HAL_CM3.S in Sources */ = {isa = PBXBuildFile; fileRef = CED6DAB51BE4A48A0054B887 /* HAL_CM3.S */; settings = {ASSET_TAGS = (); }; };
-		CED6DAC91BE4A48A0054B887 /* SVC_Table.S in Sources */ = {isa = PBXBuildFile; fileRef = CED6DAB61BE4A48A0054B887 /* SVC_Table.S */; settings = {ASSET_TAGS = (); }; };
+		CE392F2E1BDF0A8100EA8942 /* I2CDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE392F2C1BDF0A1D00EA8942 /* I2CDevice.cpp */; };
+		CE392F421BDF133500EA8942 /* GC6050.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE392F301BDF133500EA8942 /* GC6050.cpp */; };
+		CE392F431BDF133500EA8942 /* GCADJD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE392F321BDF133500EA8942 /* GCADJD.cpp */; };
+		CE392F441BDF133500EA8942 /* GCMotor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE392F341BDF133500EA8942 /* GCMotor.cpp */; };
+		CE392F451BDF133500EA8942 /* GCSonicSensor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE392F361BDF133500EA8942 /* GCSonicSensor.cpp */; };
+		CE392F461BDF133500EA8942 /* PAL3G4200D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE392F381BDF133500EA8942 /* PAL3G4200D.cpp */; };
+		CE392F471BDF133500EA8942 /* PALineSensor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE392F3A1BDF133500EA8942 /* PALineSensor.cpp */; };
+		CE392F481BDF133500EA8942 /* PAPIDController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE392F3D1BDF133500EA8942 /* PAPIDController.cpp */; };
+		CE392F491BDF133500EA8942 /* PAThreeLineSensors.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE392F401BDF133500EA8942 /* PAThreeLineSensors.cpp */; };
+		CE392F4C1BDF1CAC00EA8942 /* PASpeaker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE392F4B1BDF1CAC00EA8942 /* PASpeaker.cpp */; };
+		CE392F4F1BDF1F6200EA8942 /* PlanAlpha.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE392F4D1BDF1F6200EA8942 /* PlanAlpha.cpp */; };
+		CED6DAB71BE4A48A0054B887 /* Mutex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CED6DA8A1BE4A48A0054B887 /* Mutex.cpp */; };
+		CED6DAB81BE4A48A0054B887 /* RtosTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CED6DA8E1BE4A48A0054B887 /* RtosTimer.cpp */; };
+		CED6DAB91BE4A48A0054B887 /* Semaphore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CED6DA901BE4A48A0054B887 /* Semaphore.cpp */; };
+		CED6DABA1BE4A48A0054B887 /* Thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CED6DA921BE4A48A0054B887 /* Thread.cpp */; };
+		CED6DABB1BE4A48A0054B887 /* HAL_CM.c in Sources */ = {isa = PBXBuildFile; fileRef = CED6DA971BE4A48A0054B887 /* HAL_CM.c */; };
+		CED6DABC1BE4A48A0054B887 /* rt_CMSIS.c in Sources */ = {isa = PBXBuildFile; fileRef = CED6DA991BE4A48A0054B887 /* rt_CMSIS.c */; };
+		CED6DABD1BE4A48A0054B887 /* rt_Event.c in Sources */ = {isa = PBXBuildFile; fileRef = CED6DA9A1BE4A48A0054B887 /* rt_Event.c */; };
+		CED6DABE1BE4A48A0054B887 /* rt_List.c in Sources */ = {isa = PBXBuildFile; fileRef = CED6DA9D1BE4A48A0054B887 /* rt_List.c */; };
+		CED6DABF1BE4A48A0054B887 /* rt_Mailbox.c in Sources */ = {isa = PBXBuildFile; fileRef = CED6DA9F1BE4A48A0054B887 /* rt_Mailbox.c */; };
+		CED6DAC01BE4A48A0054B887 /* rt_MemBox.c in Sources */ = {isa = PBXBuildFile; fileRef = CED6DAA11BE4A48A0054B887 /* rt_MemBox.c */; };
+		CED6DAC11BE4A48A0054B887 /* rt_Mutex.c in Sources */ = {isa = PBXBuildFile; fileRef = CED6DAA31BE4A48A0054B887 /* rt_Mutex.c */; };
+		CED6DAC21BE4A48A0054B887 /* rt_Robin.c in Sources */ = {isa = PBXBuildFile; fileRef = CED6DAA51BE4A48A0054B887 /* rt_Robin.c */; };
+		CED6DAC31BE4A48A0054B887 /* rt_Semaphore.c in Sources */ = {isa = PBXBuildFile; fileRef = CED6DAA71BE4A48A0054B887 /* rt_Semaphore.c */; };
+		CED6DAC41BE4A48A0054B887 /* rt_System.c in Sources */ = {isa = PBXBuildFile; fileRef = CED6DAA91BE4A48A0054B887 /* rt_System.c */; };
+		CED6DAC51BE4A48A0054B887 /* rt_Task.c in Sources */ = {isa = PBXBuildFile; fileRef = CED6DAAB1BE4A48A0054B887 /* rt_Task.c */; };
+		CED6DAC61BE4A48A0054B887 /* rt_Time.c in Sources */ = {isa = PBXBuildFile; fileRef = CED6DAAD1BE4A48A0054B887 /* rt_Time.c */; };
+		CED6DAC71BE4A48A0054B887 /* RTX_Conf_CM.c in Sources */ = {isa = PBXBuildFile; fileRef = CED6DAB21BE4A48A0054B887 /* RTX_Conf_CM.c */; };
+		CED6DAC81BE4A48A0054B887 /* HAL_CM3.S in Sources */ = {isa = PBXBuildFile; fileRef = CED6DAB51BE4A48A0054B887 /* HAL_CM3.S */; };
+		CED6DAC91BE4A48A0054B887 /* SVC_Table.S in Sources */ = {isa = PBXBuildFile; fileRef = CED6DAB61BE4A48A0054B887 /* SVC_Table.S */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -572,11 +572,12 @@
 		};
 		CE392E9C1BDF09AC00EA8942 /* Build&Upload */ = {
 			isa = PBXLegacyTarget;
-			buildArgumentsString = "buildAndUpload -C \"$(PROJECT)\"";
+			buildArgumentsString = buildAndUpload;
 			buildConfigurationList = CE392F211BDF09AC00EA8942 /* Build configuration list for PBXLegacyTarget "Build&Upload" */;
 			buildPhases = (
 			);
 			buildToolPath = make;
+			buildWorkingDirectory = "$(PROJECT)";
 			dependencies = (
 			);
 			name = "Build&Upload";

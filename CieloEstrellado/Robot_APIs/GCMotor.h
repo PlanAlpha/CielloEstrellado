@@ -8,10 +8,11 @@
 class GCMotor {
     mbed::DigitalOut digital;
     mbed::PwmOut     pwm;
+	bool reverse;
     
 public:
-    GCMotor(PinName digital, PinName pwm);
-    void forward(float power);
+    GCMotor(PinName digital, PinName pwm, bool reverse = false);
+	void forward(float power);
     void __attribute__((always_inline)) forward(double power) {
         forward(static_cast<float>(power));
     }

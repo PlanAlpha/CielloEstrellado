@@ -3,25 +3,27 @@
 #include <stdlib.h>
 #include "wait_api.h"
 
-#define LINE_THRESHOLD 0.4
-
 PASpeaker          PlanAlpha::speaker1(p23);
 PASpeaker          PlanAlpha::speaker2(p24);
 GCADJD             PlanAlpha::leftColorSensor(I2CDevice::Pin::I2C0);
 GCADJD             PlanAlpha::rightColorSensor(I2CDevice::Pin::I2C1);
 //GC6050             PlanAlpha::gyroAcceleroSensor(I2CDevice::Pin::I2C0);
 //PAL3G4200D         PlanAlpha::gyroSensor(I2CDevice::Pin::I2C0);
-PALineSensor       PlanAlpha::forwardLeftLineSensor(p17, LINE_THRESHOLD);
-PALineSensor       PlanAlpha::forwardCenterLineSensor(p20, LINE_THRESHOLD);
-PALineSensor       PlanAlpha::forwardRightLineSensor(p19, LINE_THRESHOLD);
-PALineSensor       PlanAlpha::middleLeftLineSensor(p16, LINE_THRESHOLD);
-PALineSensor       PlanAlpha::middleRightLineSensor(p15, LINE_THRESHOLD);
+PALineSensor       PlanAlpha::forwardLeftLineSensor(p17, 16349);
+PALineSensor       PlanAlpha::forwardCenterLineSensor(p20, 29294);
+PALineSensor       PlanAlpha::forwardRightLineSensor(p19, 33977);
+PALineSensor       PlanAlpha::middleLeftLineSensor(p16, 10000);
+PALineSensor       PlanAlpha::middleRightLineSensor(p15, 10000);
 PAThreeLineSensors PlanAlpha::forwardLineSensors(
                         &forwardLeftLineSensor, &forwardCenterLineSensor, &forwardRightLineSensor
                    );
-GCMotor            PlanAlpha::rightMotor(p30, p26);
-GCMotor            PlanAlpha::leftMotor(p29, p25);
+GCMotor            PlanAlpha::rightMotor(p30, p26, true);
+GCMotor            PlanAlpha::leftMotor(p29, p25, false);
 mbed::DigitalIn    PlanAlpha::powerSwitch(p18, PullNone);
+mbed::PwmOut       PlanAlpha::led1(LED1);
+mbed::PwmOut       PlanAlpha::led2(LED2);
+mbed::PwmOut       PlanAlpha::led3(LED3);
+mbed::PwmOut       PlanAlpha::led4(LED4);
 
 #define NOTE_B0  31
 #define NOTE_C1  33
@@ -130,7 +132,7 @@ const int noteFrequencies[] = {
 #define __FLASH__ const
 
 struct Note {
-    static constexpr float level = 0.001;
+    static constexpr float level = 0.5;
     int note;
     int duration;
     PASpeaker *speaker;
@@ -828,35 +830,35 @@ Note __FLASH__ cielo_estrellado[] = {
 };
 
 Note __FLASH__ *songs[] = {
-//    kougen,
-//    water_crown,
-//    farewell,
-//    jr_sh1_1,
-//    jr_sh3_3,
-//    toi_aozora,
-//    ogawa_no_seseragi,
+    kougen,
+    water_crown,
+    farewell,
+    jr_sh1_1,
+    jr_sh3_3,
+    toi_aozora,
+    ogawa_no_seseragi,
     harumachikaze,
-//    springbox,
-//    mellow_time,
-//    matataku_machinami,
-//    jr_sh2_2,
-//    cielo_estrellado,
+    springbox,
+    mellow_time,
+    matataku_machinami,
+    jr_sh2_2,
+    cielo_estrellado,
 };
 
 unsigned int __FLASH__ song_sizes[] = {
-//    sizeof(kougen) / sizeof(kougen[0]),
-//    sizeof(water_crown) / sizeof(water_crown[0]),
-//    sizeof(farewell) / sizeof(farewell[0]),
-//    sizeof(jr_sh1_1) / sizeof(jr_sh1_1[0]),
-//    sizeof(jr_sh3_3) / sizeof(jr_sh3_3[0]),
-//    sizeof(toi_aozora) / sizeof(toi_aozora[0]),
-//    sizeof(ogawa_no_seseragi) / sizeof(ogawa_no_seseragi[0]),
+    sizeof(kougen) / sizeof(kougen[0]),
+    sizeof(water_crown) / sizeof(water_crown[0]),
+    sizeof(farewell) / sizeof(farewell[0]),
+    sizeof(jr_sh1_1) / sizeof(jr_sh1_1[0]),
+    sizeof(jr_sh3_3) / sizeof(jr_sh3_3[0]),
+    sizeof(toi_aozora) / sizeof(toi_aozora[0]),
+    sizeof(ogawa_no_seseragi) / sizeof(ogawa_no_seseragi[0]),
     sizeof(harumachikaze) / sizeof(harumachikaze[0]),
-//    sizeof(springbox) / sizeof(springbox[0]),
-//    sizeof(mellow_time) / sizeof(mellow_time[0]),
-//    sizeof(matataku_machinami) / sizeof(matataku_machinami[0]),
-//    sizeof(jr_sh2_2) / sizeof(jr_sh2_2[0]),
-//    sizeof(cielo_estrellado) / sizeof(cielo_estrellado[0]),
+    sizeof(springbox) / sizeof(springbox[0]),
+    sizeof(mellow_time) / sizeof(mellow_time[0]),
+    sizeof(matataku_machinami) / sizeof(matataku_machinami[0]),
+    sizeof(jr_sh2_2) / sizeof(jr_sh2_2[0]),
+    sizeof(cielo_estrellado) / sizeof(cielo_estrellado[0]),
 };
 
 int main()
@@ -872,12 +874,12 @@ int main()
     while (1) {
         for (int i = 0; i < size; i++) {
             if (! PlanAlpha::powerSwitch.read()) {
-//                return;
+                return PlanAlpha::PAApplicationMain();;
             }
             song[i].play();
         }
         wait_ms(2000);
     }
     
-    PlanAlpha::PAApplicationMain();
+	return PlanAlpha::PAApplicationMain();
 }

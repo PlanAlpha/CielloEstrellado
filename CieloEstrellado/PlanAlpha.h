@@ -72,6 +72,11 @@ namespace PlanAlpha {
     extern GCMotor            leftMotor;
     extern GCMotor            rightMotor;
     extern mbed::DigitalIn    powerSwitch;
+	
+	extern mbed::PwmOut	      led1;
+	extern mbed::PwmOut       led2;
+	extern mbed::PwmOut       led3;
+	extern mbed::PwmOut       led4;
     
     int PAApplicationMain();
 }

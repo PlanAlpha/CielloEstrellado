@@ -6,18 +6,18 @@
 
 class PALineSensor {
     mbed::AnalogIn pin;
-    const float blackValue;
+    const uint16_t blackValue;
     
 public:
-    PALineSensor(PinName pin, float blackValue);
+    PALineSensor(PinName pin, uint16_t blackValue);
     bool isBlack() {
-        return pin <= blackValue;
+        return pin.read_u16() <= blackValue;
     }
     operator bool () {
         return isBlack();
     }
-    float readRawValue() {
-        return pin;
+    uint16_t readRawValue() {
+        return pin.read_u16();
     }
 };
 

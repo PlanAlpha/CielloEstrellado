@@ -10,8 +10,6 @@
 
 class PASpeaker {
     mbed::PwmOut pwm;
-//    mbed::Timeout timeout;
-    int8_t buf[sizeof(rtos::RtosTimer)];
     rtos::RtosTimer *timer;
     static void callback(const void *arg);
     
