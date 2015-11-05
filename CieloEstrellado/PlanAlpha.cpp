@@ -10,9 +10,9 @@ GCADJD             PlanAlpha::leftColorSensor(I2CDevice::Pin::I2C0);
 GCADJD             PlanAlpha::rightColorSensor(I2CDevice::Pin::I2C1);
 //GC6050             PlanAlpha::gyroAcceleroSensor(I2CDevice::Pin::I2C0);
 //PAL3G4200D         PlanAlpha::gyroSensor(I2CDevice::Pin::I2C0);
-PALineSensor       PlanAlpha::forwardLeftLineSensor(p17, 16349);
-PALineSensor       PlanAlpha::forwardCenterLineSensor(p20, 29294);
-PALineSensor       PlanAlpha::forwardRightLineSensor(p19, 33977);
+PALineSensor       PlanAlpha::forwardLeftLineSensor(p17, 29692);
+PALineSensor       PlanAlpha::forwardCenterLineSensor(p20, 49633);
+PALineSensor       PlanAlpha::forwardRightLineSensor(p19, 53923);
 PALineSensor       PlanAlpha::middleLeftLineSensor(p16, 10000);
 PALineSensor       PlanAlpha::middleRightLineSensor(p15, 10000);
 PAThreeLineSensors PlanAlpha::forwardLineSensors(
