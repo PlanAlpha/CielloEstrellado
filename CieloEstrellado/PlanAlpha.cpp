@@ -865,11 +865,9 @@ unsigned int __FLASH__ song_sizes[] = {
 void playsong(void const *num)
 {
     int size = song_sizes[reinterpret_cast<intptr_t>(num)];
+    const Note *song = songs[reinterpret_cast<intptr_t>(num)];
     while (1) {
         for (int i = 0; i < size; i++) {
-            if (! PlanAlpha::powerSwitch.read()) {
-                return PlanAlpha::PAApplicationMain();
-            }
             song[i].play();
         }
         wait_ms(2000);
@@ -883,7 +881,6 @@ int main()
     
     srand(PlanAlpha::forwardCenterLineSensor.readRawValue() * std::numeric_limits<unsigned int>::max());
     int num = static_cast<int>(rand() * (sizeof(song_sizes) / sizeof(song_sizes[0]) + 1.0) / (1.0 + RAND_MAX));
-    const Note *song = songs[num];
     wait_ms(500);
     unsigned char stack[DEFAULT_STACK_SIZE];
     rtos::Thread thread(playsong, reinterpret_cast<void *>(num), osPriorityNormal, DEFAULT_STACK_SIZE, stack);
