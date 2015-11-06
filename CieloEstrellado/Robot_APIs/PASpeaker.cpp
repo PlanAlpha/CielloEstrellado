@@ -12,6 +12,8 @@ PASpeaker::PASpeaker(PinName pin) : pwm(pin), timer()
 void PASpeaker::init()
 {
 	timer = new rtos::RtosTimer(&PASpeaker::callback, osTimerOnce, this);
+//	timer = pool.calloc();
+//	*timer = rtos::RtosTimer(&PASpeaker::callback, osTimerOnce, this);
 }
 
 void PASpeaker::play(uint32_t frequency, float level, uint32_t duration)

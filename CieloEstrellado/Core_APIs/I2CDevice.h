@@ -3,25 +3,23 @@
 
 #include <stdint.h>
 #include "I2C.h"
+#include "MemoryPool.h"
 
 class I2CDevice {
-    uint8_t address;
-    union I2CUnion {
-        mbed::I2C object;
-        uint8_t buffer[sizeof(mbed::I2C)];
-        I2CUnion() {}
-    } i2cObject;
-    
+    int address;
+	mbed::I2C *i2c;
+	rtos::MemoryPool<mbed::I2C, 1> pool;
+	
 public:
     enum class Pin {
         I2C0,
         I2C1,
     };
-    I2CDevice(Pin dev, uint8_t address);
-    void write(uint8_t reg, uint8_t data);
-    void write(uint8_t reg, const uint8_t *datas, uint16_t length);
-    uint8_t read(uint8_t reg);
-    void read(uint8_t reg, const uint8_t *buf, uint16_t length);
+    I2CDevice(Pin dev, int address);
+    void write(char reg, char data);
+    void write(char reg, const char *datas, int length);
+    uint8_t read(char reg);
+    void read(char reg, char *buf, int length);
 };
 
 #endif

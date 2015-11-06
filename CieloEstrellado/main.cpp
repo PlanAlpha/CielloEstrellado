@@ -1,22 +1,38 @@
 #include "PlanAlpha.h"
 #include "wait_api.h"
+#include <string.h>
+
+#define DEBUG
 
 int PlanAlpha::PAApplicationMain()
 {
     using namespace PlanAlpha;
 	
-	float motorSpeed = 0.25;
-	
-//	while (1) {
-//		leftMotor.forward(motorSpeed);
-//		rightMotor.forward(motorSpeed);
-//		wait(1);
-//		leftMotor.forward(-motorSpeed);
-//		rightMotor.forward(-motorSpeed);
-//		wait(1);
-//	}
-
+#ifdef DEBUG
 	while (1) {
+		auto leftColor = leftColorSensor.read();
+		if (leftColorSensor.isGreen()) {
+			speaker1.play(440, 0.5, 50);
+		}
+		auto rightColor = rightColorSensor.read();
+		if (rightColorSensor.isGreen()) {
+			speaker2.play(440, 0.5, 50);
+		}
+		
+		printf("%d", leftColor.red);
+		printf("\t");
+		printf("%d", leftColor.green);
+		printf("\t");
+		printf("%d", leftColor.blue);
+		printf("\t");
+		
+		printf("%d", rightColor.red);
+		printf("\t");
+		printf("%d", rightColor.green);
+		printf("\t");
+		printf("%d", rightColor.blue);
+		printf("\t");
+		
 		printf("%d", forwardLeftLineSensor.readRawValue());
 		printf("\t");
 		printf("%d", forwardLeftLineSensor.isBlack());
@@ -28,43 +44,37 @@ int PlanAlpha::PAApplicationMain()
 		printf("%d", forwardRightLineSensor.readRawValue());
 		printf("\t");
 		printf("%d", forwardLeftLineSensor.isBlack());
-		printf("\n");
+		printf("\r\n");
+		
+		wait_ms(50);
 	}
+#endif
 	
-	const float threshold = 0.4;
+	
+	float motorSpeed = 0.25;
 	while (1) {
-		if (forwardLeftLineSensor.readRawValue() < threshold) {
-			if (forwardRightLineSensor.readRawValue() < threshold) {
+		if (forwardLineSensors.read() & PAThreeLineSensors::Left) {
+			if (forwardLineSensors.read() & PAThreeLineSensors::Right) {
 				leftMotor.forward(-motorSpeed);
 				rightMotor.forward(-motorSpeed);
 			}else{
-//				speaker1.play(500, 0.5, 100);
+				led4.write(1);
 				leftMotor.forward(motorSpeed);
 				rightMotor.forward(-motorSpeed);
 			}
 		}else{
-			if(forwardRightLineSensor.readRawValue() < threshold) {
-//				speaker1.play(600, 0.5, 100);
+			if(forwardLineSensors.read() & PAThreeLineSensors::Right) {
+				led3.write(1);
 				leftMotor.forward(-motorSpeed);
 				rightMotor.forward(motorSpeed);
 			}else{
-//				speaker1.play(700, 0.5, 100);
 				leftMotor.forward(motorSpeed);
 				rightMotor.forward(motorSpeed);
 			}
 		}
-		printf("%f", forwardLeftLineSensor.readRawValue());
-		printf("\t");
-		printf("%f", forwardCenterLineSensor.readRawValue());
-		printf("\t");
-		printf("%f", forwardRightLineSensor.readRawValue());
-		printf("\n");
-		
-		// this leds was gone \(¥_¥)/
-//		led1.write(forwardRightLineSensor.readRawValue());
-//		led4.write(forwardLeftLineSensor.readRawValue());
-//		led2.write(forwardCenterLineSensor.readRawValue());
-//		led3.write(forwardCenterLineSensor.readRawValue());
+		wait_ms(10);
+		led4.write(0);
+		led3.write(0);
 	}
 	
 	

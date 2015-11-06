@@ -886,6 +886,8 @@ int main()
     rtos::Thread thread(playsong, reinterpret_cast<void *>(num), osPriorityNormal, DEFAULT_STACK_SIZE, stack);
     while (PlanAlpha::powerSwitch) ;
     thread.terminate();
+	PlanAlpha::speaker1.off();
+	PlanAlpha::speaker2.off();
     
 	return PlanAlpha::PAApplicationMain();
 }

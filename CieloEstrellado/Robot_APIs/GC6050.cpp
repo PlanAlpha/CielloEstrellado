@@ -21,7 +21,7 @@ GC6050::GC6050(I2CDevice::Pin dev, bool isAD0Pulluped) : i2c(dev, i2cAddress | i
 void GC6050::updateValues()
 {
     union SensorValue {
-        uint8_t buf[6];
+        char buf[6];
         uint16_t value[3];
     };
     SensorValue accel;

@@ -1,14 +1,18 @@
 #include "I2CDevice.h"
 
-I2CDevice::I2CDevice(Pin devIndex, uint8_t _address) : address(_address)
+I2CDevice::I2CDevice(Pin devIndex, int _address) : address(_address)
 {
     switch (devIndex) {
         case Pin::I2C0:
-            i2cObject.object = mbed::I2C(MBED_I2C0);
+//			i2c = pool.calloc();
+//            *i2c = mbed::I2C(MBED_I2C0);
+			i2c = new mbed::I2C(MBED_I2C0);
             break;
             
         case Pin::I2C1:
-            i2cObject.object = mbed::I2C(MBED_I2C1);
+//			i2c = pool.calloc();
+//            *i2c = mbed::I2C(MBED_I2C1);
+			i2c = new mbed::I2C(MBED_I2C1);
             break;
             
         default:
@@ -17,30 +21,28 @@ I2CDevice::I2CDevice(Pin devIndex, uint8_t _address) : address(_address)
     }
 }
 
-void I2CDevice::write(uint8_t reg, uint8_t data)
+void I2CDevice::write(char reg, char data)
 {
     write(reg, &data, 1);
 }
 
-void I2CDevice::write(uint8_t reg, const uint8_t *datas, uint16_t length)
+void I2CDevice::write(char reg, const char *datas, int length)
 {
-    uint8_t buf[length + 1];
+    char buf[length + 1];
     buf[0] = reg;
     memcpy(&buf[1], datas, length);
-    i2cObject.object.write(address, reinterpret_cast<const char *>(buf), length + 1);
+    if (i2c->write(address, buf, length + 1)) puts("I2C write failed");
 }
 
-uint8_t I2CDevice::read(uint8_t reg)
+uint8_t I2CDevice::read(char reg)
 {
-    uint8_t buf[1];
+    char buf[1];
     read(reg, buf, 1);
     return buf[0];
 }
 
-void I2CDevice::read(uint8_t reg, const uint8_t *datas, uint16_t length)
+void I2CDevice::read(char reg, char *datas, int length)
 {
-    uint8_t buf[length + 1];
-    buf[0] = reg;
-    memcpy(&buf[1], datas, length);
-    i2cObject.object.read(address, reinterpret_cast<char *>(buf), length + 1);
+	if (i2c->write(address, &reg, 1, true)) puts("I2C write failed");
+    if (i2c->read(address, datas, length)) puts("I2C read failed");
 }

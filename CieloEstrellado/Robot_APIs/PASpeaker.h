@@ -12,6 +12,7 @@ class PASpeaker {
     mbed::PwmOut pwm;
     rtos::RtosTimer *timer;
     static void callback(const void *arg);
+	rtos::MemoryPool<rtos::RtosTimer, 1> pool;
     
 public:
     PASpeaker(PinName pin);
