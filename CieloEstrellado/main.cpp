@@ -4,9 +4,8 @@
 
 //#define PRINT_SENSORS
 
-int PlanAlpha::PAApplicationMain()
+void PAApplecation::main()
 {
-    using namespace PlanAlpha;
 	
 #ifdef PRINT_SENSORS
 	while (1) {
@@ -116,9 +115,4 @@ int PlanAlpha::PAApplicationMain()
         
 		wait_ms(10);
 	}
-	
-	
-	
-
-    return 0;
 }

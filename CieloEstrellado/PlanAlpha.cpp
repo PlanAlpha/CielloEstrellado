@@ -4,32 +4,6 @@
 #include "wait_api.h"
 #include "mbed-rtos/rtos/Thread.h"
 
-PASpeaker          PlanAlpha::speaker1(p23);
-PASpeaker          PlanAlpha::speaker2(p24);
-GCADJD             PlanAlpha::leftColorSensor(I2CDevice::Pin::I2C0);
-GCADJD             PlanAlpha::rightColorSensor(I2CDevice::Pin::I2C1);
-//GC6050             PlanAlpha::gyroAcceleroSensor(I2CDevice::Pin::I2C0);
-//PAL3G4200D         PlanAlpha::gyroSensor(I2CDevice::Pin::I2C0);
-PALineSensor       PlanAlpha::forwardLeftLineSensor(p17, 40000);
-PALineSensor       PlanAlpha::forwardCenterLineSensor(p20, 40000);
-PALineSensor       PlanAlpha::forwardRightLineSensor(p19, 56000);
-PALineSensor       PlanAlpha::middleLeftLineSensor(p16, 10000);
-PALineSensor       PlanAlpha::middleRightLineSensor(p15, 10000);
-PAThreeLineSensors PlanAlpha::forwardLineSensors(
-                        &forwardLeftLineSensor, &forwardCenterLineSensor, &forwardRightLineSensor
-                   );
-GCMotor            PlanAlpha::rightMotor(p30, p25, false);
-GCMotor            PlanAlpha::leftMotor(p29, p26, true);
-mbed::DigitalIn    PlanAlpha::powerSwitch(p18, PullNone);
-PAPIDController    PlanAlpha::pid(0.000005, 0.000001, 0.000001, 1000);
-mbed::DigitalIn    PlanAlpha::rightTouchSensor(p7, PullNone);
-mbed::DigitalIn    PlanAlpha::leftTouchSensor(p8, PullNone);
-
-mbed::PwmOut       PlanAlpha::led1(LED1);
-mbed::PwmOut       PlanAlpha::led2(LED2);
-mbed::PwmOut       PlanAlpha::led3(LED3);
-mbed::PwmOut       PlanAlpha::led4(LED4);
-
 #define NOTE_B0  31
 #define NOTE_C1  33
 #define NOTE_CS1 35
@@ -67,7 +41,7 @@ mbed::PwmOut       PlanAlpha::led4(LED4);
 #define NOTE_A3  220
 #define NOTE_AS3 233
 #define NOTE_B3  247
-#define NOTE_C4  262     // ド
+#define NOTE_C4  262     // C4
 #define NOTE_CS4 277
 #define NOTE_D4  294
 #define NOTE_DS4 311
@@ -136,19 +110,22 @@ const int noteFrequencies[] = {
 
 #define __FLASH__ const
 
+static PASpeaker *internalSpeaker1;
+static PASpeaker *internalSpeaker2;
+
 struct Note {
-    static constexpr float level = 0.5;
+    static constexpr float level = 0.001;
     int note;
     int duration;
-    PASpeaker *speaker;
-    Note(int _note, int _duration, PASpeaker *_speaker = &PlanAlpha::speaker1)
+    PASpeaker **speaker;
+    Note(int _note, int _duration, PASpeaker **_speaker = &internalSpeaker1)
     : note(_note), duration(_duration), speaker(_speaker) {}
     void play() const {
         if (note) {
             if (duration < 0) {
-                speaker->play(note, level, -duration);
+                (*speaker)->play(note, level, -duration);
             } else {
-                speaker->play(note, level, duration);
+                (*speaker)->play(note, level, duration);
                 if (duration) {
                     wait_ms(duration + 10);
                 }
@@ -159,7 +136,7 @@ struct Note {
     }
 };
 
-#define duration 300
+#   define duration 300
 Note __FLASH__ kougen[] = {
     {NOTE_B4, duration * 2},
     {NOTE_B4, duration},
@@ -180,9 +157,9 @@ Note __FLASH__ kougen[] = {
     {NOTE_FS5, duration * 2},
     {NOTE_G5, duration * 2},
 };
-#undef duration
+#   undef duration
 
-#define duration 250
+#   define duration 250
 Note __FLASH__ water_crown[] = {
     {NOTE_C5, duration / 2},
     {NOTE_G4, duration / 2},
@@ -446,9 +423,9 @@ Note __FLASH__ ogawa_no_seseragi[] = {
     {NOTE_G5, duration / 2},
     {NOTE_C6, duration * 3},
 };
-#undef duration
+#   undef duration
 
-#define duration 170
+#   define duration 170
 Note __FLASH__ harumachikaze[] = {
     {NOTE_G4, duration},
     {NOTE_C5, duration},
@@ -487,9 +464,9 @@ Note __FLASH__ harumachikaze[] = {
     {NOTE_C6, duration / 2},
     {NOTE_E6, duration / 2},
 };
-#undef duration
+#   undef duration
 
-#define duration 300
+#   define duration 300
 Note __FLASH__ springbox[] = {
     {NOTE_G4, duration},
     {NOTE_E5, duration},
@@ -517,9 +494,9 @@ Note __FLASH__ springbox[] = {
     {NOTE_B4, duration},
     {NOTE_C5, duration * 4},
 };
-#undef duration
+#   undef duration
 
-#define duration 300
+#   define duration 300
 Note __FLASH__ mellow_time[] = {
     {NOTE_D5, duration},
     {NOTE_A4, duration / 2},
@@ -612,9 +589,9 @@ Note __FLASH__ matataku_machinami[] = {
     {NOTE_F5, static_cast<int>(duration * 1.5)},
     {NOTE_E5, static_cast<int>(duration * 1.5)},
 };
-#undef duration
+#   undef duration
 
-#define duration 200
+#   define duration 200
 Note __FLASH__ jr_sh2_2[] = {
     {NOTE_A4, duration},
     {NOTE_C5, duration},
@@ -654,7 +631,7 @@ Note __FLASH__ jr_sh2_2[] = {
     {NOTE_DS5, duration},
     {NOTE_C5, duration * 4},
 };
-#undef duration
+#   undef duration
 
 Note __FLASH__ cielo_estrellado[] = {
     {noteFrequencies[60], 0},
@@ -690,148 +667,148 @@ Note __FLASH__ cielo_estrellado[] = {
     {noteFrequencies[67], 0},
     {0, 136},
     {noteFrequencies[60], 0},
-    {noteFrequencies[72], 0, &PlanAlpha::speaker2},
+    {noteFrequencies[72], 0, &internalSpeaker2},
     {0, 137},
     {noteFrequencies[67], 0},
-    {noteFrequencies[79], 0, &PlanAlpha::speaker2},
+    {noteFrequencies[79], 0, &internalSpeaker2},
     {0, 138},
     {noteFrequencies[72], 0},
-    {noteFrequencies[84], 0, &PlanAlpha::speaker2},
+    {noteFrequencies[84], 0, &internalSpeaker2},
     {0, 135},
     {noteFrequencies[67], 0},
-    {noteFrequencies[79], 0, &PlanAlpha::speaker2},
+    {noteFrequencies[79], 0, &internalSpeaker2},
     {0, 137},
     {noteFrequencies[60], 0},
-    {noteFrequencies[72], 0, &PlanAlpha::speaker2},
+    {noteFrequencies[72], 0, &internalSpeaker2},
     {0, 138},
     {noteFrequencies[67], 0},
-    {noteFrequencies[79], 0, &PlanAlpha::speaker2},
+    {noteFrequencies[79], 0, &internalSpeaker2},
     {0, 136},
     {noteFrequencies[72], 0},
-    {noteFrequencies[84], 0, &PlanAlpha::speaker2},
+    {noteFrequencies[84], 0, &internalSpeaker2},
     {0, 138},
     {noteFrequencies[67], 0},
-    {noteFrequencies[79], 0, &PlanAlpha::speaker2},
+    {noteFrequencies[79], 0, &internalSpeaker2},
     {0, 136},
     {noteFrequencies[60], 0},
-    {noteFrequencies[72], 0, &PlanAlpha::speaker2},
+    {noteFrequencies[72], 0, &internalSpeaker2},
     {0, 137},
     {noteFrequencies[67], 0},
-    {noteFrequencies[79], 0, &PlanAlpha::speaker2},
+    {noteFrequencies[79], 0, &internalSpeaker2},
     {0, 138},
     {noteFrequencies[72], 0},
-    {noteFrequencies[84], 0, &PlanAlpha::speaker2},
+    {noteFrequencies[84], 0, &internalSpeaker2},
     {0, 135},
     {noteFrequencies[67], 0},
-    {noteFrequencies[79], 0, &PlanAlpha::speaker2},
+    {noteFrequencies[79], 0, &internalSpeaker2},
     {0, 137},
     {noteFrequencies[60], 0},
-    {noteFrequencies[72], 0, &PlanAlpha::speaker2},
+    {noteFrequencies[72], 0, &internalSpeaker2},
     {0, 137},
     {noteFrequencies[67], 0},
-    {noteFrequencies[79], 0, &PlanAlpha::speaker2},
+    {noteFrequencies[79], 0, &internalSpeaker2},
     {0, 137},
     {noteFrequencies[72], 0},
-    {noteFrequencies[84], 0, &PlanAlpha::speaker2},
+    {noteFrequencies[84], 0, &internalSpeaker2},
     {0, 138},
     {noteFrequencies[67], 0},
-    {noteFrequencies[79], 0, &PlanAlpha::speaker2},
+    {noteFrequencies[79], 0, &internalSpeaker2},
     {0, 135},
     {noteFrequencies[60], 0},
-    {noteFrequencies[72], 0, &PlanAlpha::speaker2},
+    {noteFrequencies[72], 0, &internalSpeaker2},
     {0, 137},
     {noteFrequencies[67], 0},
-    {noteFrequencies[91], 0, &PlanAlpha::speaker2},
+    {noteFrequencies[91], 0, &internalSpeaker2},
     {0, 137},
     {noteFrequencies[72], 0},
-    {noteFrequencies[96], 0, &PlanAlpha::speaker2},
+    {noteFrequencies[96], 0, &internalSpeaker2},
     {0, 136},
     {noteFrequencies[67], 0},
-    {noteFrequencies[91], 0, &PlanAlpha::speaker2},
+    {noteFrequencies[91], 0, &internalSpeaker2},
     {0, 138},
     {noteFrequencies[60], 0},
-    {noteFrequencies[72], 0, &PlanAlpha::speaker2},
+    {noteFrequencies[72], 0, &internalSpeaker2},
     {0, 136},
     {noteFrequencies[67], 0},
-    {noteFrequencies[91], 0, &PlanAlpha::speaker2},
+    {noteFrequencies[91], 0, &internalSpeaker2},
     {0, 137},
     {noteFrequencies[72], 0},
-    {noteFrequencies[96], 0, &PlanAlpha::speaker2},
+    {noteFrequencies[96], 0, &internalSpeaker2},
     {0, 138},
     {noteFrequencies[67], 0},
-    {noteFrequencies[91], 0, &PlanAlpha::speaker2},
+    {noteFrequencies[91], 0, &internalSpeaker2},
     {0, 135},
     {noteFrequencies[60], 0},
-    {noteFrequencies[72], 0, &PlanAlpha::speaker2},
+    {noteFrequencies[72], 0, &internalSpeaker2},
     {0, 137},
     {noteFrequencies[67], 0},
-    {noteFrequencies[91], 0, &PlanAlpha::speaker2},
+    {noteFrequencies[91], 0, &internalSpeaker2},
     {0, 136},
     {noteFrequencies[72], 0},
-    {noteFrequencies[96], 0, &PlanAlpha::speaker2},
+    {noteFrequencies[96], 0, &internalSpeaker2},
     {0, 137},
     {noteFrequencies[67], 0},
-    {noteFrequencies[91], 0, &PlanAlpha::speaker2},
+    {noteFrequencies[91], 0, &internalSpeaker2},
     {0, 137},
     {noteFrequencies[60], 0},
-    {noteFrequencies[72], 0, &PlanAlpha::speaker2},
+    {noteFrequencies[72], 0, &internalSpeaker2},
     {0, 136},
     {noteFrequencies[67], 0},
-    {noteFrequencies[91], 0, &PlanAlpha::speaker2},
+    {noteFrequencies[91], 0, &internalSpeaker2},
     {0, 137},
     {noteFrequencies[72], 0},
-    {noteFrequencies[96], 0, &PlanAlpha::speaker2},
+    {noteFrequencies[96], 0, &internalSpeaker2},
     {0, 136},
     {noteFrequencies[67], 0},
-    {noteFrequencies[91], 0, &PlanAlpha::speaker2},
+    {noteFrequencies[91], 0, &internalSpeaker2},
     {0, 137},
     {noteFrequencies[67], 0},
-    {noteFrequencies[79], 0, &PlanAlpha::speaker2},
+    {noteFrequencies[79], 0, &internalSpeaker2},
     {0, 138},
     {noteFrequencies[68], 0},
-    {noteFrequencies[80], 0, &PlanAlpha::speaker2},
+    {noteFrequencies[80], 0, &internalSpeaker2},
     {0, 136},
     {noteFrequencies[72], 0},
-    {noteFrequencies[84], 0, &PlanAlpha::speaker2},
+    {noteFrequencies[84], 0, &internalSpeaker2},
     {0, 137},
     {noteFrequencies[75], 0},
-    {noteFrequencies[87], 0, &PlanAlpha::speaker2},
+    {noteFrequencies[87], 0, &internalSpeaker2},
     {0, 138},
     {noteFrequencies[82], 0},
-    {noteFrequencies[94], 0, &PlanAlpha::speaker2},
+    {noteFrequencies[94], 0, &internalSpeaker2},
     {0, 136},
     {noteFrequencies[80], 0},
-    {noteFrequencies[92], 0, &PlanAlpha::speaker2},
+    {noteFrequencies[92], 0, &internalSpeaker2},
     {0, 137},
     {noteFrequencies[84], 0},
-    {noteFrequencies[96], 0, &PlanAlpha::speaker2},
+    {noteFrequencies[96], 0, &internalSpeaker2},
     {0, 137},
     {noteFrequencies[75], 0},
-    {noteFrequencies[87], 0, &PlanAlpha::speaker2},
+    {noteFrequencies[87], 0, &internalSpeaker2},
     {0, 137},
     {noteFrequencies[70], 0},
-    {noteFrequencies[82], 0, &PlanAlpha::speaker2},
+    {noteFrequencies[82], 0, &internalSpeaker2},
     {0, 137},
     {noteFrequencies[70], 0},
-    {noteFrequencies[82], 0, &PlanAlpha::speaker2},
+    {noteFrequencies[82], 0, &internalSpeaker2},
     {0, 136},
     {noteFrequencies[74], 0},
-    {noteFrequencies[86], 0, &PlanAlpha::speaker2},
+    {noteFrequencies[86], 0, &internalSpeaker2},
     {0, 137},
     {noteFrequencies[77], 0},
-    {noteFrequencies[89], 0, &PlanAlpha::speaker2},
+    {noteFrequencies[89], 0, &internalSpeaker2},
     {0, 137},
     {noteFrequencies[84], 0},
-    {noteFrequencies[96], 0, &PlanAlpha::speaker2},
+    {noteFrequencies[96], 0, &internalSpeaker2},
     {0, 137},
     {noteFrequencies[86], 0},
-    {noteFrequencies[98], 0, &PlanAlpha::speaker2},
+    {noteFrequencies[98], 0, &internalSpeaker2},
     {0, 138},
     {noteFrequencies[89], 0},
-    {noteFrequencies[101], 0, &PlanAlpha::speaker2},
+    {noteFrequencies[101], 0, &internalSpeaker2},
     {0, 136},
     {noteFrequencies[96], -687},
-    {noteFrequencies[108], -687, &PlanAlpha::speaker2},
+    {noteFrequencies[108], -687, &internalSpeaker2},
 };
 
 Note __FLASH__ *songs[] = {
@@ -878,48 +855,52 @@ void playsong(void const *num)
     }
 }
 
-static float pidValue;
-
-void pidRead(void const *arg)
-{
-    while (1) {
-        uint16_t left = PlanAlpha::middleLeftLineSensor.readRawValue();
-        uint16_t right = PlanAlpha::middleRightLineSensor.readRawValue();
-        if (right > 23000) {
-            right = right * 4 / 3;
-        } else {
-            right = right * 145 / 97;
-        }
-        pidValue = PlanAlpha::pid.next(right - left);
-        reinterpret_cast<rtos::Thread *>(const_cast<void *>(arg))->wait(50);
-    }
-}
-
-void PlanAlpha::pid_forward()
+void __attribute__((weak)) PAApplecation::pid_forward()
 {
     constexpr float offset = 0.3;
-    PlanAlpha::rightMotor.forward(-pidValue + offset);
-    PlanAlpha::leftMotor.forward(pidValue + offset);
+    rightMotor.forward(-pidValue + offset);
+    leftMotor.forward(pidValue + offset);
 }
+
+class InternalApplecation : public PAApplecation {
+    float pidValue = 0;
+    unsigned char pidStack[DEFAULT_STACK_SIZE];
+    rtos::Thread pidThread = rtos::Thread(pidCallback, this, osPriorityBelowNormal, DEFAULT_STACK_SIZE, pidStack);
+    
+public:
+    static void pidCallback(void const *arg) {
+        reinterpret_cast<InternalApplecation *>(const_cast<void *>(arg))->pidRead();
+    }
+    InternalApplecation() : PAApplecation() {
+        internalSpeaker1 = &speaker1;
+        internalSpeaker2 = &speaker2;
+        srand(forwardCenterLineSensor.readRawValue());
+        int num = static_cast<int>(rand() * (sizeof(song_sizes) / sizeof(song_sizes[0]) + 1.0) / (1.0 + RAND_MAX));
+        wait_ms(500);
+        unsigned char stack[DEFAULT_STACK_SIZE];
+        rtos::Thread thread(playsong, reinterpret_cast<void *>(num), osPriorityNormal, DEFAULT_STACK_SIZE, stack);
+        while (1) ;
+        thread.terminate();
+        speaker1.off();
+        speaker2.off();
+    }
+    void pidRead() {
+        while (1) {
+            uint16_t left = middleLeftLineSensor.readRawValue();
+            uint16_t right = middleRightLineSensor.readRawValue();
+            if (right > 23000) {
+                right = right * 4 / 3;
+            } else {
+                right = right * 145 / 97;
+            }
+            pidValue = pid.next(right - left);
+            pidThread.wait(50);
+        }
+    }
+};
 
 int main()
 {
-    PlanAlpha::speaker1.init();
-    PlanAlpha::speaker2.init();
-    
-    srand(PlanAlpha::forwardCenterLineSensor.readRawValue() * std::numeric_limits<unsigned int>::max());
-    int num = static_cast<int>(rand() * (sizeof(song_sizes) / sizeof(song_sizes[0]) + 1.0) / (1.0 + RAND_MAX));
-    wait_ms(500);
-    unsigned char stack[DEFAULT_STACK_SIZE];
-    rtos::Thread thread(playsong, reinterpret_cast<void *>(num), osPriorityNormal, DEFAULT_STACK_SIZE, stack);
-    while (PlanAlpha::powerSwitch) ;
-    thread.terminate();
-	PlanAlpha::speaker1.off();
-	PlanAlpha::speaker2.off();
-    
-//    static rtos::RtosTimer pidTimer = rtos::RtosTimer(pidRead);
-//    pidTimer.start(100);
-    static rtos::Thread pidthread = rtos::Thread(pidRead, &thread, osPriorityBelowNormal, DEFAULT_STACK_SIZE, stack);
-    
-	return PlanAlpha::PAApplicationMain();
+    InternalApplecation().main();
+    return 0;
 }

@@ -10,13 +10,11 @@
 
 class PASpeaker {
     mbed::PwmOut pwm;
-    rtos::RtosTimer *timer;
+    rtos::RtosTimer timer = rtos::RtosTimer(&PASpeaker::callback, osTimerOnce, this);
     static void callback(const void *arg);
-	rtos::MemoryPool<rtos::RtosTimer, 1> pool;
     
 public:
     PASpeaker(PinName pin);
-    void init();
     void play(uint32_t frequency, float level, uint32_t duration);
     void off();
 };
