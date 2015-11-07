@@ -10,17 +10,21 @@ GCADJD             PlanAlpha::leftColorSensor(I2CDevice::Pin::I2C0);
 GCADJD             PlanAlpha::rightColorSensor(I2CDevice::Pin::I2C1);
 //GC6050             PlanAlpha::gyroAcceleroSensor(I2CDevice::Pin::I2C0);
 //PAL3G4200D         PlanAlpha::gyroSensor(I2CDevice::Pin::I2C0);
-PALineSensor       PlanAlpha::forwardLeftLineSensor(p17, 29692);
-PALineSensor       PlanAlpha::forwardCenterLineSensor(p20, 49633);
-PALineSensor       PlanAlpha::forwardRightLineSensor(p19, 53923);
+PALineSensor       PlanAlpha::forwardLeftLineSensor(p17, 40000);
+PALineSensor       PlanAlpha::forwardCenterLineSensor(p20, 40000);
+PALineSensor       PlanAlpha::forwardRightLineSensor(p19, 56000);
 PALineSensor       PlanAlpha::middleLeftLineSensor(p16, 10000);
 PALineSensor       PlanAlpha::middleRightLineSensor(p15, 10000);
 PAThreeLineSensors PlanAlpha::forwardLineSensors(
                         &forwardLeftLineSensor, &forwardCenterLineSensor, &forwardRightLineSensor
                    );
-GCMotor            PlanAlpha::rightMotor(p30, p26, true);
-GCMotor            PlanAlpha::leftMotor(p29, p25, false);
+GCMotor            PlanAlpha::rightMotor(p30, p25, false);
+GCMotor            PlanAlpha::leftMotor(p29, p26, true);
 mbed::DigitalIn    PlanAlpha::powerSwitch(p18, PullNone);
+PAPIDController    PlanAlpha::pid(0.000005, 0.000001, 0.000001, 1000);
+mbed::DigitalIn    PlanAlpha::rightTouchSensor(p7, PullNone);
+mbed::DigitalIn    PlanAlpha::leftTouchSensor(p8, PullNone);
+
 mbed::PwmOut       PlanAlpha::led1(LED1);
 mbed::PwmOut       PlanAlpha::led2(LED2);
 mbed::PwmOut       PlanAlpha::led3(LED3);
@@ -874,6 +878,30 @@ void playsong(void const *num)
     }
 }
 
+static float pidValue;
+
+void pidRead(void const *arg)
+{
+    while (1) {
+        uint16_t left = PlanAlpha::middleLeftLineSensor.readRawValue();
+        uint16_t right = PlanAlpha::middleRightLineSensor.readRawValue();
+        if (right > 23000) {
+            right = right * 4 / 3;
+        } else {
+            right = right * 145 / 97;
+        }
+        pidValue = PlanAlpha::pid.next(right - left);
+        reinterpret_cast<rtos::Thread *>(const_cast<void *>(arg))->wait(50);
+    }
+}
+
+void PlanAlpha::pid_forward()
+{
+    constexpr float offset = 0.3;
+    PlanAlpha::rightMotor.forward(-pidValue + offset);
+    PlanAlpha::leftMotor.forward(pidValue + offset);
+}
+
 int main()
 {
     PlanAlpha::speaker1.init();
@@ -888,6 +916,10 @@ int main()
     thread.terminate();
 	PlanAlpha::speaker1.off();
 	PlanAlpha::speaker2.off();
+    
+//    static rtos::RtosTimer pidTimer = rtos::RtosTimer(pidRead);
+//    pidTimer.start(100);
+    static rtos::Thread pidthread = rtos::Thread(pidRead, &thread, osPriorityBelowNormal, DEFAULT_STACK_SIZE, stack);
     
 	return PlanAlpha::PAApplicationMain();
 }

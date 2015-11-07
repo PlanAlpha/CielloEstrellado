@@ -2,13 +2,13 @@
 #include "wait_api.h"
 #include <string.h>
 
-#define DEBUG
+//#define PRINT_SENSORS
 
 int PlanAlpha::PAApplicationMain()
 {
     using namespace PlanAlpha;
 	
-#ifdef DEBUG
+#ifdef PRINT_SENSORS
 	while (1) {
 		auto leftColor = leftColorSensor.read();
 		if (leftColorSensor.isGreen()) {
@@ -39,11 +39,11 @@ int PlanAlpha::PAApplicationMain()
 		printf("\t");
 		printf("%d", forwardCenterLineSensor.readRawValue());
 		printf("\t");
-		printf("%d", forwardLeftLineSensor.isBlack());
+		printf("%d", forwardCenterLineSensor.isBlack());
 		printf("\t");
 		printf("%d", forwardRightLineSensor.readRawValue());
 		printf("\t");
-		printf("%d", forwardLeftLineSensor.isBlack());
+		printf("%d", forwardRightLineSensor.isBlack());
 		printf("\r\n");
 		
 		wait_ms(50);
@@ -51,30 +51,70 @@ int PlanAlpha::PAApplicationMain()
 #endif
 	
 	
-	float motorSpeed = 0.25;
+	float motorSpeed = 0.5;
 	while (1) {
-		if (forwardLineSensors.read() & PAThreeLineSensors::Left) {
-			if (forwardLineSensors.read() & PAThreeLineSensors::Right) {
-				leftMotor.forward(-motorSpeed);
-				rightMotor.forward(-motorSpeed);
-			}else{
-				led4.write(1);
-				leftMotor.forward(motorSpeed);
-				rightMotor.forward(-motorSpeed);
-			}
-		}else{
-			if(forwardLineSensors.read() & PAThreeLineSensors::Right) {
-				led3.write(1);
-				leftMotor.forward(-motorSpeed);
-				rightMotor.forward(motorSpeed);
-			}else{
-				leftMotor.forward(motorSpeed);
-				rightMotor.forward(motorSpeed);
-			}
-		}
+        switch (forwardLineSensors.read()) {
+            case PAThreeLineSensors::Left | PAThreeLineSensors::Center:
+            case PAThreeLineSensors::Left:
+//                led4.write(1);
+                leftMotor.forward(-motorSpeed);
+                rightMotor.forward(motorSpeed);
+                break;
+                
+            case PAThreeLineSensors::Left | PAThreeLineSensors::Right:
+                leftMotor.forward(-motorSpeed);
+                rightMotor.forward(-motorSpeed);
+//                led4.write(0);
+//                led3.write(0);
+                break;
+                
+            case PAThreeLineSensors::Right | PAThreeLineSensors::Center:
+            case PAThreeLineSensors::Right:
+//                led3.write(1);
+                leftMotor.forward(motorSpeed);
+                rightMotor.forward(-motorSpeed);
+                break;
+                
+            default:
+                pid_forward();
+//                led4.write(0);
+//                led3.write(0);
+                break;
+        }
+        
+        if (rightTouchSensor && leftTouchSensor) {
+            leftMotor.forward(-motorSpeed);
+            rightMotor.forward(-motorSpeed);
+            wait_ms(300);
+            
+            leftMotor.forward(motorSpeed);
+            rightMotor.forward(-motorSpeed);
+            wait_ms(500);
+            
+            while (1) {
+                leftMotor.free();
+                rightMotor.forward(motorSpeed);
+                while (! leftTouchSensor) {
+                    if (forwardLineSensors.read()) {
+                        goto out;
+                    }
+                }
+                leftMotor.forward(motorSpeed);
+                rightMotor.forward(-motorSpeed);
+                wait_ms(150);
+            }
+        out:
+            leftMotor.forward(motorSpeed);
+            rightMotor.forward(-motorSpeed);
+            wait_ms(600);
+            leftMotor.forward(motorSpeed);
+            rightMotor.forward(motorSpeed);
+            while (! (forwardLineSensors.read() & PAThreeLineSensors::Right)) ;
+            leftMotor.forward(motorSpeed);
+            rightMotor.forward(-motorSpeed);
+        }
+        
 		wait_ms(10);
-		led4.write(0);
-		led3.write(0);
 	}
 	
 	

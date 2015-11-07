@@ -54,6 +54,7 @@
 #include "Robot_APIs/PALineSensor.h"
 #include "Robot_APIs/PAThreeLineSensors.h"
 #include "Robot_APIs/GCMotor.h"
+#include "Robot_APIs/PAPIDController.h"
 #include "DigitalIn.h"
 
 namespace PlanAlpha {
@@ -72,6 +73,10 @@ namespace PlanAlpha {
     extern GCMotor            leftMotor;
     extern GCMotor            rightMotor;
     extern mbed::DigitalIn    powerSwitch;
+    extern PAPIDController    pid;
+    extern mbed::DigitalIn    rightTouchSensor;
+    extern mbed::DigitalIn    leftTouchSensor;
+    // p7
 	
 	extern mbed::PwmOut	      led1;
 	extern mbed::PwmOut       led2;
@@ -79,6 +84,7 @@ namespace PlanAlpha {
 	extern mbed::PwmOut       led4;
     
     int PAApplicationMain();
+    void pid_forward();
 }
 
 #endif

@@ -19,7 +19,7 @@ class PAL3G4200D {
     PAMovingAverage<float, 10> yAverage;
     PAMovingAverage<float, 50> zAverage;
     union Data {
-        uint8_t buf[2];
+        char buf[2];
         int16_t value;
     };
     
