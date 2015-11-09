@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		CE392F121BDF09AC00EA8942 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE392F111BDF09AC00EA8942 /* main.cpp */; };
-		CE392F141BDF09AC00EA8942 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = CE392F131BDF09AC00EA8942 /* Makefile */; };
 		CE392F2E1BDF0A8100EA8942 /* I2CDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE392F2C1BDF0A1D00EA8942 /* I2CDevice.cpp */; };
 		CE392F421BDF133500EA8942 /* GC6050.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE392F301BDF133500EA8942 /* GC6050.cpp */; };
 		CE392F431BDF133500EA8942 /* GCADJD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE392F321BDF133500EA8942 /* GCADJD.cpp */; };
@@ -147,7 +146,6 @@
 		CE392F0E1BDF09AC00EA8942 /* Transaction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Transaction.h; sourceTree = "<group>"; };
 		CE392F0F1BDF09AC00EA8942 /* us_ticker_api.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = us_ticker_api.h; sourceTree = "<group>"; };
 		CE392F111BDF09AC00EA8942 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		CE392F131BDF09AC00EA8942 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		CE392F151BDF09AC00EA8942 /* LPC1768.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = LPC1768.xcconfig; sourceTree = "<group>"; };
 		CE392F2B1BDF0A0700EA8942 /* I2CDevice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = I2CDevice.h; path = Core_APIs/I2CDevice.h; sourceTree = "<group>"; };
 		CE392F2C1BDF0A1D00EA8942 /* I2CDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = I2CDevice.cpp; path = Core_APIs/I2CDevice.cpp; sourceTree = "<group>"; };
@@ -243,7 +241,6 @@
 				CE392F4E1BDF1F6200EA8942 /* PlanAlpha.h */,
 				CE392F4D1BDF1F6200EA8942 /* PlanAlpha.cpp */,
 				CE392F111BDF09AC00EA8942 /* main.cpp */,
-				CE392F131BDF09AC00EA8942 /* Makefile */,
 				CE392F151BDF09AC00EA8942 /* LPC1768.xcconfig */,
 				CED6DA851BE4A48A0054B887 /* mbed-rtos */,
 				CE392EA31BDF09AC00EA8942 /* mbed */,
@@ -688,7 +685,6 @@
 				CE392F451BDF133500EA8942 /* GCSonicSensor.cpp in Sources */,
 				CED6DAC61BE4A48A0054B887 /* rt_Time.c in Sources */,
 				CED6DABA1BE4A48A0054B887 /* Thread.cpp in Sources */,
-				CE392F141BDF09AC00EA8942 /* Makefile in Sources */,
 				CED6DABD1BE4A48A0054B887 /* rt_Event.c in Sources */,
 				CED6DAC21BE4A48A0054B887 /* rt_Robin.c in Sources */,
 				CE392F491BDF133500EA8942 /* PAThreeLineSensors.cpp in Sources */,

@@ -7,9 +7,8 @@
 
 class I2CDevice {
     int address;
-	mbed::I2C *i2c;
-	rtos::MemoryPool<mbed::I2C, 1> pool;
-	
+	mbed::I2C i2c;
+
 public:
     enum class Pin {
         I2C0,

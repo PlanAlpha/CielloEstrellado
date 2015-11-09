@@ -19,6 +19,9 @@ public:
     uint16_t readRawValue() {
         return pin.read_u16();
     }
+    float readFloatValue() {
+        return pin.read();
+    }
 };
 
 #endif

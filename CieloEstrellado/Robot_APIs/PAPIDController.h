@@ -13,7 +13,7 @@ class PAPIDController {
     float integrationLimit;
     uint16_t lastTime = 0;
     float lastError = 0;
-    mbed::Timer timer;
+//    mbed::Timer timer;
     
 public:
     PAPIDController(float Kp, float Ki, float Kd, float integrationLimit = std::numeric_limits<float>::max());
