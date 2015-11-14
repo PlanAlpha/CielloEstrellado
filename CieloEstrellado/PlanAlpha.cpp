@@ -114,7 +114,7 @@ static PASpeaker *internalSpeaker1;
 static PASpeaker *internalSpeaker2;
 
 struct Note {
-    static constexpr float level = 0.001;
+    static constexpr float level = 0.5;
     int note;
     int duration;
     PASpeaker **speaker;
@@ -858,15 +858,14 @@ void playsong(void const *num)
 void __attribute__((weak)) PAApplecation::pid_forward()
 {
     constexpr float offset = 0.3;
-    rightMotor.forward(-pidValue + offset);
-    leftMotor.forward(pidValue + offset);
+    rightMotor.forward(pidValue + offset);
+    leftMotor.forward(-pidValue + offset);
 }
 
 class InternalApplecation : public PAApplecation {
-    float pidValue = 0;
     unsigned char pidStack[DEFAULT_STACK_SIZE];
-    rtos::Thread pidThread = rtos::Thread(pidCallback, this, osPriorityBelowNormal, DEFAULT_STACK_SIZE, pidStack);
-    
+//    rtos::Thread pidThread = rtos::Thread(pidCallback, this, osPriorityBelowNormal, DEFAULT_STACK_SIZE, pidStack);
+	
 public:
     static void pidCallback(void const *arg) {
         reinterpret_cast<InternalApplecation *>(const_cast<void *>(arg))->pidRead();
@@ -879,10 +878,11 @@ public:
         wait_ms(500);
         unsigned char stack[DEFAULT_STACK_SIZE];
         rtos::Thread thread(playsong, reinterpret_cast<void *>(num), osPriorityNormal, DEFAULT_STACK_SIZE, stack);
-        while (1) ;
+        while (powerSwitch) ;
         thread.terminate();
         speaker1.off();
         speaker2.off();
+		pid.initialize();
     }
     void pidRead() {
         while (1) {
@@ -893,8 +893,8 @@ public:
             } else {
                 right = right * 145 / 97;
             }
-            pidValue = pid.next(right - left);
-            pidThread.wait(50);
+			PAApplecation::pidValue = pid.next(right - left);
+//            pidThread.wait(50);
         }
     }
 };

@@ -1,4 +1,5 @@
 #include "PAPIDController.h"
+#include <math.h>
 
 PAPIDController::PAPIDController(float _Kp, float _Ki, float _Kd, float limit) : Kp(_Kp), Ki(_Ki), Kd(_Kd), integrationLimit(limit)
 {
@@ -8,7 +9,11 @@ PAPIDController::PAPIDController(float _Kp, float _Ki, float _Kd, float limit) :
 
 float PAPIDController::next(float error)
 {
-    integrationValue += error;
+	if (fabsf(error) < 100) {
+		integrationValue = 0;
+	} else {
+		integrationValue += error;
+	}
     if (integrationValue > integrationLimit) {
         integrationValue = integrationLimit;
     } else if (integrationValue < -integrationLimit) {

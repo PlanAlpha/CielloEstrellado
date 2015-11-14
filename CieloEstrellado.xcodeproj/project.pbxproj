@@ -41,6 +41,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		773BD3521BF07046005DE78D /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		CE392EA01BDF09AC00EA8942 /* Index */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Index; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE392EA41BDF09AC00EA8942 /* AnalogIn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnalogIn.h; sourceTree = "<group>"; };
 		CE392EA51BDF09AC00EA8942 /* analogin_api.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = analogin_api.h; sourceTree = "<group>"; };
@@ -244,6 +245,7 @@
 				CE392F151BDF09AC00EA8942 /* LPC1768.xcconfig */,
 				CED6DA851BE4A48A0054B887 /* mbed-rtos */,
 				CE392EA31BDF09AC00EA8942 /* mbed */,
+				773BD3521BF07046005DE78D /* Makefile */,
 			);
 			path = CieloEstrellado;
 			sourceTree = "<group>";

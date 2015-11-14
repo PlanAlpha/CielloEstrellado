@@ -56,29 +56,29 @@
 #include "Robot_APIs/GCMotor.h"
 #include "Robot_APIs/PAPIDController.h"
 #include "DigitalIn.h"
+#include "Serial.h"
 
 class PAApplecation {
-    float pidValue = 0;
-    
 protected:
+	float pidValue = 0;
     PASpeaker          speaker1                 = PASpeaker(p23);
     PASpeaker          speaker2                 = PASpeaker(p24);
-    GCADJD             leftColorSensor          = GCADJD(I2CDevice::Pin::I2C0);
-    GCADJD             rightColorSensor         = GCADJD(I2CDevice::Pin::I2C1);
+    GCADJD             leftColorSensor          = GCADJD(I2CDevice::Pin::I2C1);
+    GCADJD             rightColorSensor         = GCADJD(I2CDevice::Pin::I2C0);
     //GC6050             gyroAcceleroSensor     = GC6050(I2CDevice::Pin::I2C0);
     //PAL3G4200D         gyroSensor             = PAL3G4200D(I2CDevice::Pin::I2C0);
-    PALineSensor       forwardLeftLineSensor    = PALineSensor(p17, 40000);
-    PALineSensor       forwardCenterLineSensor  = PALineSensor(p20, 40000);
-    PALineSensor       forwardRightLineSensor   = PALineSensor(p19, 56000);
-    PALineSensor       middleLeftLineSensor     = PALineSensor(p16, 10000);
-    PALineSensor       middleRightLineSensor    = PALineSensor(p15, 10000);
+    PALineSensor       forwardLeftLineSensor    = PALineSensor(p19, 40000);
+    PALineSensor       forwardCenterLineSensor  = PALineSensor(p20, 30000);
+    PALineSensor       forwardRightLineSensor   = PALineSensor(p17, 40000);
+    PALineSensor       middleLeftLineSensor     = PALineSensor(p15, 10000);
+    PALineSensor       middleRightLineSensor    = PALineSensor(p16, 10000);
     PAThreeLineSensors forwardLineSensors       = PAThreeLineSensors(
                             &forwardLeftLineSensor, &forwardCenterLineSensor, &forwardRightLineSensor
                        );
-    GCMotor            rightMotor               = GCMotor(p30, p25, false);
+    GCMotor            rightMotor               = GCMotor(p30, p25, true);
     GCMotor            leftMotor                = GCMotor(p29, p26, true);
     mbed::DigitalIn    powerSwitch              = mbed::DigitalIn(p18, PullNone);
-    PAPIDController    pid                      = PAPIDController(0.000005, 0.000001, 0.000001, 1000);
+    PAPIDController    pid                      = PAPIDController(0.000010, 0.000000, 0.000000, 50000);
     mbed::DigitalIn    rightTouchSensor         = mbed::DigitalIn(p7, PullNone);
     mbed::DigitalIn    leftTouchSensor          = mbed::DigitalIn(p8, PullNone);
     
@@ -86,9 +86,14 @@ protected:
     mbed::PwmOut       led2                     = mbed::PwmOut(LED2);
     mbed::PwmOut       led3                     = mbed::PwmOut(LED3);
     mbed::PwmOut       led4                     = mbed::PwmOut(LED4);
-
+	mbed::Serial pc;
+	void serialHandler();
+	void leftCross();
+	void unknownCross();
+	void kabe();
+	
 public:
-    PAApplecation() {}
+	PAApplecation() : pc(USBTX, USBRX) {}
     void main();
     void pid_forward();
 };
