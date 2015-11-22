@@ -34,8 +34,12 @@ GCADJD::GCADJDValue GCADJD::read()
     };
 }
 
-bool GCADJD::isGreen()
+bool GCADJD::isGreen(GCADJD::GCADJDValue value)
 {
-    GCADJDValue value = read();
-	return (value.blue- value.red) > 60 && value.green < 950 /*&& value.red < 500 && value.blue < 500*/;
+	return (value.blue - value.red) < 100  && value.green < 850 /* && value.red < 500 */;
+}
+
+bool GCADJD::isBlack(GCADJD::GCADJDValue value)
+{
+	return (value.blue - value.red) < 50 /* && value.red != 1023 */ && (value.red != 1023 || value.blue != 1023) && value.green == 1023 /* && value.blue != 1023 */;
 }

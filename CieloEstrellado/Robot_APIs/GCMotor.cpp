@@ -3,6 +3,7 @@
 
 GCMotor::GCMotor(PinName _digital, PinName _pwm, bool _reverse) : digital(_digital, 0), pwm(_pwm), reverse(_reverse)
 {
+	pwm.period_us(1000);
     free();
 }
 

@@ -855,7 +855,7 @@ void playsong(void const *num)
     }
 }
 
-void __attribute__((weak)) PAApplecation::pid_forward()
+void PAApplecation::pid_forward()
 {
     constexpr float offset = 0.3;
     rightMotor.forward(pidValue + offset);
@@ -863,12 +863,12 @@ void __attribute__((weak)) PAApplecation::pid_forward()
 }
 
 class InternalApplecation : public PAApplecation {
-    unsigned char pidStack[DEFAULT_STACK_SIZE];
-//    rtos::Thread pidThread = rtos::Thread(pidCallback, this, osPriorityBelowNormal, DEFAULT_STACK_SIZE, pidStack);
+//    unsigned char pidStack[DEFAULT_STACK_SIZE];
+//    rtos::Thread pidThread = rtos::Thread(pidCallback, this, osPriorityNormal, DEFAULT_STACK_SIZE, pidStack);
 	
 public:
     static void pidCallback(void const *arg) {
-        reinterpret_cast<InternalApplecation *>(const_cast<void *>(arg))->pidRead();
+//        reinterpret_cast<InternalApplecation *>(const_cast<void *>(arg))->pidRead();
     }
     InternalApplecation() : PAApplecation() {
         internalSpeaker1 = &speaker1;
@@ -876,31 +876,51 @@ public:
         srand(forwardCenterLineSensor.readRawValue());
         int num = static_cast<int>(rand() * (sizeof(song_sizes) / sizeof(song_sizes[0]) + 1.0) / (1.0 + RAND_MAX));
         wait_ms(500);
-        unsigned char stack[DEFAULT_STACK_SIZE];
-        rtos::Thread thread(playsong, reinterpret_cast<void *>(num), osPriorityNormal, DEFAULT_STACK_SIZE, stack);
+		unsigned char stack[DEFAULT_STACK_SIZE];
+        rtos::Thread playThread(playsong, reinterpret_cast<void *>(num), osPriorityNormal, DEFAULT_STACK_SIZE, stack);
         while (powerSwitch) ;
-        thread.terminate();
         speaker1.off();
         speaker2.off();
 		pid.initialize();
     }
-    void pidRead() {
-        while (1) {
-            uint16_t left = middleLeftLineSensor.readRawValue();
-            uint16_t right = middleRightLineSensor.readRawValue();
-            if (right > 23000) {
-                right = right * 4 / 3;
-            } else {
-                right = right * 145 / 97;
-            }
-			PAApplecation::pidValue = pid.next(right - left);
+//    void pidRead() {
+//		int i = 0;
+//        while (1) {
+//            uint16_t left = middleLeftLineSensor.readRawValue();
+//            uint16_t right = middleRightLineSensor.readRawValue();
+//			if (left > 36975) {
+//				if (left < std::numeric_limits<uint16_t>::max() / 1.111742424)
+//					left = left * 1.111742424;
+//			} else {
+//				left = left * 1.200787402;
+//			}
+//			PAApplecation::pidValue = pid.next(right - left);
+//			i++;
+//			if (i > 100) {
+//				i = 0;
+//			}
+//			led4 = i / 100.0;
 //            pidThread.wait(50);
-        }
-    }
+//        }
+//    }
 };
 
+//static void mainCaller(const void *app)
+//{
+//	reinterpret_cast<InternalApplecation *>(const_cast<void *>(app))->main();
+//}
+
+#include "Mail.h"
 int main()
 {
-    InternalApplecation().main();
+//	InternalApplecation app;
+//	unsigned char stack[DEFAULT_STACK_SIZE];
+//	rtos::Thread thread(mainCaller, &app, osPriorityAboveNormal, DEFAULT_STACK_SIZE, stack);
+//	rtos::Mail<char, 1> mail;1
+//	while (1) {
+//		mail.get();
+//	}
+	InternalApplecation().main();
+	
     return 0;
 }

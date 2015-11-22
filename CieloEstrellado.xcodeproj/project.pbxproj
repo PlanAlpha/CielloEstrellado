@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		779171F41C00483100A8BF92 /* Servo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 779171F21C00483100A8BF92 /* Servo.cpp */; };
 		CE392F121BDF09AC00EA8942 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE392F111BDF09AC00EA8942 /* main.cpp */; };
 		CE392F2E1BDF0A8100EA8942 /* I2CDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE392F2C1BDF0A1D00EA8942 /* I2CDevice.cpp */; };
 		CE392F421BDF133500EA8942 /* GC6050.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE392F301BDF133500EA8942 /* GC6050.cpp */; };
@@ -42,6 +43,8 @@
 
 /* Begin PBXFileReference section */
 		773BD3521BF07046005DE78D /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		779171F21C00483100A8BF92 /* Servo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Servo.cpp; sourceTree = "<group>"; };
+		779171F31C00483100A8BF92 /* Servo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Servo.h; sourceTree = "<group>"; };
 		CE392EA01BDF09AC00EA8942 /* Index */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Index; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE392EA41BDF09AC00EA8942 /* AnalogIn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnalogIn.h; sourceTree = "<group>"; };
 		CE392EA51BDF09AC00EA8942 /* analogin_api.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = analogin_api.h; sourceTree = "<group>"; };
@@ -218,6 +221,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
+		779171F11C00483100A8BF92 /* Servo */ = {
+			isa = PBXGroup;
+			children = (
+				779171F21C00483100A8BF92 /* Servo.cpp */,
+				779171F31C00483100A8BF92 /* Servo.h */,
+			);
+			path = Servo;
+			sourceTree = "<group>";
+		};
 		CE392E941BDF09AC00EA8942 = {
 			isa = PBXGroup;
 			children = (
@@ -243,6 +255,7 @@
 				CE392F4D1BDF1F6200EA8942 /* PlanAlpha.cpp */,
 				CE392F111BDF09AC00EA8942 /* main.cpp */,
 				CE392F151BDF09AC00EA8942 /* LPC1768.xcconfig */,
+				779171F11C00483100A8BF92 /* Servo */,
 				CED6DA851BE4A48A0054B887 /* mbed-rtos */,
 				CE392EA31BDF09AC00EA8942 /* mbed */,
 				773BD3521BF07046005DE78D /* Makefile */,
@@ -679,6 +692,7 @@
 				CED6DAC71BE4A48A0054B887 /* RTX_Conf_CM.c in Sources */,
 				CED6DABC1BE4A48A0054B887 /* rt_CMSIS.c in Sources */,
 				CED6DABE1BE4A48A0054B887 /* rt_List.c in Sources */,
+				779171F41C00483100A8BF92 /* Servo.cpp in Sources */,
 				CED6DAB91BE4A48A0054B887 /* Semaphore.cpp in Sources */,
 				CE392F481BDF133500EA8942 /* PAPIDController.cpp in Sources */,
 				CED6DAC81BE4A48A0054B887 /* HAL_CM3.S in Sources */,
