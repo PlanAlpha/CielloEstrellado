@@ -97,6 +97,8 @@ protected:
     mbed::PwmOut       led3                     = mbed::PwmOut(LED3);
     mbed::PwmOut       led4                     = mbed::PwmOut(LED4);
 	mbed::Serial pc;
+	mbed::DigitalIn    mercury					= mbed::DigitalIn(p14, PullNone);
+	bool leftFirst = true;
 	
 public:
 	PAApplecation() : pc(USBTX, USBRX) {}

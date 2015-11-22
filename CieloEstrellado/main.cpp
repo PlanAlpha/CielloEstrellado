@@ -4,7 +4,7 @@
 #include "Serial.h"
 #include "SerialBase.h"
 
-#define PRINT_SENSORS
+//#define PRINT_SENSORS
 
 //---------------------------------------------------------------------
 
@@ -29,7 +29,7 @@ void PAApplecation::serialHandler()
 
 void PAApplecation::kabe()
 {
-	float motorSpeed = 0.3;
+	float motorSpeed = 0.25;
 //	leftMotor.forward(-motorSpeed);
 //	rightMotor.forward(-motorSpeed);
 //	wait_ms(300);
@@ -78,6 +78,11 @@ out:
 	leftMotor.forward(motorSpeed);
 	rightMotor.forward(motorSpeed);
 	while (! (forwardLineSensors.read() & PAThreeLineSensors::Right)) ;
+	wait_ms(100);
+	while (! (forwardLineSensors.read() || middleLeftLineSensor.isBlack() || middleRightLineSensor.isBlack())) {
+		rightMotor.forward(-motorSpeed);
+		leftMotor.forward(-motorSpeed);
+	}
 	leftMotor.forward(motorSpeed);
 	rightMotor.forward(-motorSpeed);
 }
@@ -213,6 +218,11 @@ void PAApplecation::main()
 //	uint16_t leftGreenJudgeValue = 20000;
 //	uint16_t rightGreenJudgeValue = 40000;
 	float motorSpeed = 0.27;
+//	rightMotor.forward(motorSpeed);
+//	leftMotor.forward(motorSpeed);
+//	while (1) {
+//		
+//	}
 //	timer.start();
 	while (1) {
 		
@@ -257,115 +267,175 @@ void PAApplecation::main()
 //			crossJudge(isLeftGreen);
 //		}
 		
-		if (forwardLeftLineSensor.isBlack()) {
-			leftMotor.forward(-motorSpeed);
-			rightMotor.forward(motorSpeed);
-			while (forwardLeftLineSensor.isBlack()) wait_ms(10);
-		}
-		if (forwardRightLineSensor.isBlack()) {
-			leftMotor.forward(motorSpeed);
-			rightMotor.forward(-motorSpeed);
-			while (forwardRightLineSensor.isBlack()) wait_ms(10);
-		}
-		if (middleLeftLineSensor.isBlack()) {
-			if (middleRightLineSensor.isBlack()) {
-				leftMotor.forward(motorSpeed);
-				rightMotor.forward(motorSpeed);
+		if (!leftFirst) {
+			if (forwardLeftLineSensor.isBlack()) {
+				if (mercury) {
+					leftMotor.forward(motorSpeed * 0.8);
+					rightMotor.forward(motorSpeed);
+				} else {
+					leftMotor.forward(-motorSpeed);
+					rightMotor.forward(motorSpeed);
+					while (forwardLeftLineSensor.isBlack()) wait_ms(10);
+				}
+			}
+			if (forwardRightLineSensor.isBlack()) {
+				if (mercury) {
+					leftMotor.forward(motorSpeed);
+					rightMotor.forward(motorSpeed * 0.8);
+				} else {
+					leftMotor.forward(motorSpeed);
+					rightMotor.forward(-motorSpeed);
+					while (forwardRightLineSensor.isBlack()) wait_ms(50);
+					rightMotor.forward(motorSpeed);
+				}
+			}
+			if (middleLeftLineSensor.isBlack()) {
+				if (middleRightLineSensor.isBlack()) {
+					leftMotor.forward(motorSpeed);
+					rightMotor.forward(motorSpeed);
+				} else {
+					leftMotor.forward(-motorSpeed);
+					rightMotor.forward(motorSpeed);
+					wait_ms(500);
+					leftMotor.forward(motorSpeed);
+					wait_ms(300);
+					rightMotor.free();
+					leftMotor.free();
+					wait_ms(300);
+					while (! (forwardLineSensors.read() || middleLeftLineSensor.isBlack() || middleRightLineSensor.isBlack())) {
+						rightMotor.forward(-motorSpeed);
+						leftMotor.forward(-motorSpeed);
+					}
+				}
 			} else {
-				leftMotor.forward(-motorSpeed);
-				rightMotor.forward(motorSpeed);
+				if (middleRightLineSensor.isBlack()) {
+					leftMotor.forward(motorSpeed);
+					rightMotor.forward(-motorSpeed);
+				} else {
+					leftMotor.forward(motorSpeed);
+					rightMotor.forward(motorSpeed);
+				}
 			}
 		} else {
-			if (middleRightLineSensor.isBlack()) {
+			if (forwardLeftLineSensor.isBlack()) {
+				leftMotor.forward(-motorSpeed);
+				rightMotor.forward(motorSpeed);
+				while (forwardLeftLineSensor.isBlack()) wait_ms(10);
+			}
+			if (forwardRightLineSensor.isBlack()) {
 				leftMotor.forward(motorSpeed);
 				rightMotor.forward(-motorSpeed);
-			} else {
+				wait_ms(300);
+				while (forwardRightLineSensor.isBlack()) wait_ms(383);
+				rightMotor.forward(motorSpeed);
+				wait_ms(200);
+			}
+			if (mercury) {
 				leftMotor.forward(motorSpeed);
 				rightMotor.forward(motorSpeed);
-//				pid_forward();
+				continue;
+			}
+			if (middleLeftLineSensor.isBlack()) {
+				if (middleRightLineSensor.isBlack()) {
+					leftMotor.forward(motorSpeed);
+					rightMotor.forward(motorSpeed);
+				} else {
+					leftMotor.forward(-motorSpeed);
+					rightMotor.forward(motorSpeed);
+				}
+			} else {
+				if (middleRightLineSensor.isBlack()) {
+					leftMotor.forward(motorSpeed);
+					rightMotor.forward(-motorSpeed);
+				} else {
+					leftMotor.forward(motorSpeed);
+					rightMotor.forward(motorSpeed);
+				}
 			}
 		}
+		
 		if (leftTouchSensor.read() & rightTouchSensor.read()) {
+			leftFirst = false;
 			kabe();
 		}
 		
-		auto leftColorValue = leftColorSensor.read();
-		auto rightColorValue = rightColorSensor.read();
-		if (leftColorSensor.isGreen(leftColorValue)) {
-//			leftMotor.free();
-//			rightMotor.free();
-//			wait_ms(500);
-			
-			leftMotor.forward(motorSpeed);
-			rightMotor.forward(motorSpeed);
-			while (! ((forwardLeftLineSensor.isBlack() || middleLeftLineSensor.isBlack()))) ;
-			while (forwardLeftLineSensor.isBlack() || middleLeftLineSensor.isBlack() || middleRightLineSensor.isBlack() || forwardRightLineSensor.isBlack()) ;
-			leftMotor.free();
-			rightMotor.free();
-//			while (powerSwitch) ;
-			wait_ms(500);
-			
-			leftMotor.forward(-motorSpeed);
-			rightMotor.forward(motorSpeed);
-//			while (! forwardRightLineSensor.isBlack()) ;
-//			while (middleRightLineSensor.isBlack() || forwardRightLineSensor.isBlack()) ;
-//			while (! forwardRightLineSensor.isBlack()) ;
-//			while (forwardLeftLineSensor.isBlack()) ;
-//			while (! forwardLeftLineSensor.isBlack()) ;
-//			while (! middleLeftLineSensor.isBlack()) ;
-//			while (forwardCenterLineSensor.isBlack()) ;
-//			while (! forwardCenterLineSensor.isBlack()) ;
-//			while (! (! middleLeftLineSensor && forwardCenterLineSensor.isBlack() && ! middleRightLineSensor.isBlack())) ;
-			while (! leftColorSensor.isBlack()) ;
-			while (leftColorSensor.isBlack()) ;
-			
-//			leftMotor.free();
-//			rightMotor.free();
-//			wait_ms(200);
-//			while (powerSwitch) ;
-			leftMotor.free();
-			while (! rightColorSensor.isBlack()) ;
-//			while (! forwardCenterLineSensor.isBlack()) ;
-		} else if (rightColorSensor.isGreen(rightColorValue)) {
+//		auto leftColorValue = leftColorSensor.read();
+//		auto rightColorValue = rightColorSensor.read();
+//		if (leftColorSensor.isGreen(leftColorValue)) {
 ////			leftMotor.free();
 ////			rightMotor.free();
 ////			wait_ms(500);
 //			
 //			leftMotor.forward(motorSpeed);
 //			rightMotor.forward(motorSpeed);
-//			while (! ((forwardLeftLineSensor.isBlack() || middleLeftLineSensor.isBlack()) && (middleRightLineSensor.isBlack() || forwardRightLineSensor.isBlack()))) ;
+//			while (! ((forwardLeftLineSensor.isBlack() || middleLeftLineSensor.isBlack()))) ;
 //			while (forwardLeftLineSensor.isBlack() || middleLeftLineSensor.isBlack() || middleRightLineSensor.isBlack() || forwardRightLineSensor.isBlack()) ;
 //			leftMotor.free();
 //			rightMotor.free();
-//			wait_ms(200);
+////			while (powerSwitch) ;
+//			wait_ms(500);
+//			
+//			leftMotor.forward(-motorSpeed);
+//			rightMotor.forward(motorSpeed);
+////			while (! forwardRightLineSensor.isBlack()) ;
+////			while (middleRightLineSensor.isBlack() || forwardRightLineSensor.isBlack()) ;
+////			while (! forwardRightLineSensor.isBlack()) ;
+////			while (forwardLeftLineSensor.isBlack()) ;
+////			while (! forwardLeftLineSensor.isBlack()) ;
+////			while (! middleLeftLineSensor.isBlack()) ;
+////			while (forwardCenterLineSensor.isBlack()) ;
+////			while (! forwardCenterLineSensor.isBlack()) ;
+////			while (! (! middleLeftLineSensor && forwardCenterLineSensor.isBlack() && ! middleRightLineSensor.isBlack())) ;
+//			while (! leftColorSensor.isBlack()) ;
+//			while (leftColorSensor.isBlack()) ;
+//			
+////			leftMotor.free();
+////			rightMotor.free();
+////			wait_ms(200);
+////			while (powerSwitch) ;
+//			leftMotor.free();
+//			while (! rightColorSensor.isBlack()) ;
+////			while (! forwardCenterLineSensor.isBlack()) ;
+//		} else if (rightColorSensor.isGreen(rightColorValue)) {
+//////			leftMotor.free();
+//////			rightMotor.free();
+//////			wait_ms(500);
+////			
+////			leftMotor.forward(motorSpeed);
+////			rightMotor.forward(motorSpeed);
+////			while (! ((forwardLeftLineSensor.isBlack() || middleLeftLineSensor.isBlack()) && (middleRightLineSensor.isBlack() || forwardRightLineSensor.isBlack()))) ;
+////			while (forwardLeftLineSensor.isBlack() || middleLeftLineSensor.isBlack() || middleRightLineSensor.isBlack() || forwardRightLineSensor.isBlack()) ;
+////			leftMotor.free();
+////			rightMotor.free();
+////			wait_ms(200);
+////			
+////			leftMotor.forward(motorSpeed);
+////			rightMotor.forward(-motorSpeed);
+//////			while (! forwardLeftLineSensor.isBlack()) ;
+//////			while (middleLeftLineSensor.isBlack() || forwardLeftLineSensor.isBlack()) ;
+////			while (! forwardRightLineSensor.isBlack()) ;
+//////			while (forwardRightLineSensor.isBlack()) ;
+//////			while (! forwardRightLineSensor.isBlack()) ;
+////			
+////			rightMotor.free();
+////			while (! forwardCenterLineSensor.isBlack() ) ;
+//			
+//			leftMotor.forward(motorSpeed);
+//			rightMotor.forward(motorSpeed);
+//			while (! ((forwardLeftLineSensor.isBlack() || middleLeftLineSensor.isBlack()))) ;
+//			while (forwardLeftLineSensor.isBlack() || middleLeftLineSensor.isBlack() || middleRightLineSensor.isBlack() || forwardRightLineSensor.isBlack()) ;
+//			leftMotor.free();
+//			rightMotor.free();
+//			wait_ms(500);
 //			
 //			leftMotor.forward(motorSpeed);
 //			rightMotor.forward(-motorSpeed);
-////			while (! forwardLeftLineSensor.isBlack()) ;
-////			while (middleLeftLineSensor.isBlack() || forwardLeftLineSensor.isBlack()) ;
-//			while (! forwardRightLineSensor.isBlack()) ;
-////			while (forwardRightLineSensor.isBlack()) ;
-////			while (! forwardRightLineSensor.isBlack()) ;
+//			while (! rightColorSensor.isBlack()) ;
+//			while (rightColorSensor.isBlack()) ;
 //			
 //			rightMotor.free();
-//			while (! forwardCenterLineSensor.isBlack() ) ;
-			
-			leftMotor.forward(motorSpeed);
-			rightMotor.forward(motorSpeed);
-			while (! ((forwardLeftLineSensor.isBlack() || middleLeftLineSensor.isBlack()))) ;
-			while (forwardLeftLineSensor.isBlack() || middleLeftLineSensor.isBlack() || middleRightLineSensor.isBlack() || forwardRightLineSensor.isBlack()) ;
-			leftMotor.free();
-			rightMotor.free();
-			wait_ms(500);
-			
-			leftMotor.forward(motorSpeed);
-			rightMotor.forward(-motorSpeed);
-			while (! rightColorSensor.isBlack()) ;
-			while (rightColorSensor.isBlack()) ;
-			
-			rightMotor.free();
-			while (! leftColorSensor.isBlack()) ;
-		}
+//			while (! leftColorSensor.isBlack()) ;
+//		}
 		
 //		if (leftColorSensor.isBlack(leftColorValue) && rightColorSensor.isBlack(rightColorValue)) {
 //			speaker1.play(440, 0.8, 1000);

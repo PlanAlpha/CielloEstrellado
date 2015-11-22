@@ -867,7 +867,7 @@ class InternalApplecation : public PAApplecation {
 //    rtos::Thread pidThread = rtos::Thread(pidCallback, this, osPriorityNormal, DEFAULT_STACK_SIZE, pidStack);
 	
 public:
-    static void pidCallback(void const *arg) {
+    static void pidCallback(void const __attribute__((unused)) *arg) {
 //        reinterpret_cast<InternalApplecation *>(const_cast<void *>(arg))->pidRead();
     }
     InternalApplecation() : PAApplecation() {
@@ -878,7 +878,11 @@ public:
         wait_ms(500);
 		unsigned char stack[DEFAULT_STACK_SIZE];
         rtos::Thread playThread(playsong, reinterpret_cast<void *>(num), osPriorityNormal, DEFAULT_STACK_SIZE, stack);
-        while (powerSwitch) ;
+		while (powerSwitch) {
+			if ((PAApplecation::leftFirst) && (rightTouchSensor.read() || leftTouchSensor.read())) {
+				PAApplecation::leftFirst = false;
+			}
+		}
         speaker1.off();
         speaker2.off();
 		pid.initialize();
